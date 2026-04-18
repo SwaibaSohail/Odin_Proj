@@ -16,6 +16,8 @@ A collection of projects built during [The Odin Project](https://www.theodinproj
 | [Sign Up Form](https://swaibasohail.github.io/Odin_Proj/Sign%20up%20form/) | Validation form with real-time password check |
 | [To Do List](https://swaibasohail.github.io/Odin_Proj/To%20Do%20list/) | Task manager with projects and due dates |
 | [Weather App](https://swaibasohail.github.io/Odin_Proj/Weather%20App/) | Real-time weather data from OpenWeatherMap API |
+| [My Landing Page](https://swaibasohail.github.io/Odin_Proj/My_Landing_Page/) | Author tribute page with book gallery |
+
 
 ## Tech Stack
 
