@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,66 +11,66 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 40px 20px;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         h1 {
             text-align: center;
             color: white;
             font-size: 3rem;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
-        
+
         .subtitle {
             text-align: center;
-            color: rgba(255,255,255,0.9);
+            color: rgba(255, 255, 255, 0.9);
             font-size: 1.2rem;
             margin-bottom: 50px;
         }
-        
+
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
         }
-        
+
         .project-card {
             background: white;
             border-radius: 15px;
             padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
+
         .project-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
         }
-        
+
         .project-title {
             font-size: 1.5rem;
             font-weight: bold;
             color: #333;
             margin-bottom: 10px;
         }
-        
+
         .project-description {
             color: #666;
             margin-bottom: 20px;
             line-height: 1.5;
         }
-        
+
         .project-link {
             display: inline-block;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -80,70 +81,84 @@
             font-weight: 500;
             transition: opacity 0.3s ease;
         }
-        
+
         .project-link:hover {
             opacity: 0.9;
         }
-        
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
             }
-            
+
             .projects-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>🚀 My Odin Projects</h1>
         <div class="subtitle">A collection of web development projects from The Odin Project curriculum</div>
-        
+
         <div class="projects-grid">
             <div class="project-card">
                 <div class="project-title">📊 Admin Dashboard</div>
-                <div class="project-description">Responsive admin dashboard with analytics cards, charts, and navigation sidebar.</div>
+                <div class="project-description">Responsive admin dashboard with analytics cards, charts, and navigation
+                    sidebar.</div>
                 <a href="Admin%20dashboard/" class="project-link">Live Preview →</a>
             </div>
-            
+
             <div class="project-card">
                 <div class="project-title">♞ Knights Travails</div>
                 <div class="project-description">Chess knight shortest path finder using BFS algorithm.</div>
                 <a href="Knights%20Travails/" class="project-link">Live Preview →</a>
             </div>
-            
+
             <div class="project-card">
                 <div class="project-title">📚 Library</div>
-                <div class="project-description">Book tracking app with add/remove functionality and read status toggle.</div>
+                <div class="project-description">Book tracking app with add/remove functionality and read status toggle.
+                </div>
                 <a href="Library/" class="project-link">Live Preview →</a>
             </div>
-            
+
             <div class="project-card">
                 <div class="project-title">🍽️ Restaurant Page</div>
-                <div class="project-description">Dynamic restaurant website with tabbed browsing using JavaScript modules.</div>
+                <div class="project-description">Dynamic restaurant website with tabbed browsing using JavaScript
+                    modules.</div>
                 <a href="Restaurant%20Page/" class="project-link">Live Preview →</a>
             </div>
-            
+
             <div class="project-card">
                 <div class="project-title">📝 Sign Up Form</div>
-                <div class="project-description">Validation form with real-time password matching and custom error messages.</div>
+                <div class="project-description">Validation form with real-time password matching and custom error
+                    messages.</div>
                 <a href="Sign%20up%20form/" class="project-link">Live Preview →</a>
             </div>
-            
+
             <div class="project-card">
                 <div class="project-title">✅ To Do List</div>
                 <div class="project-description">Task management app with projects, due dates, and local storage.</div>
                 <a href="To%20Do%20list/" class="project-link">Live Preview →</a>
             </div>
-            
+
             <div class="project-card">
                 <div class="project-title">🌤️ Weather App</div>
                 <div class="project-description">Real-time weather data using OpenWeatherMap API and async calls.</div>
                 <a href="Weather%20App/" class="project-link">Live Preview →</a>
             </div>
+
+            <!-- Add this card to your projects grid -->
+            <div class="project-card">
+                <div class="project-title">📖 My Landing Page</div>
+                <div class="project-description">Author tribute page featuring Fyodor Dostoevsky with book gallery and
+                    biography.</div>
+                <a href="My_Landing_Page/" class="project-link">Live Preview →</a>
+            </div>
         </div>
     </div>
 </body>
+
 </html>
