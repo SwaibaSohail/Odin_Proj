@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knight's Travails - Chess Pathfinding</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="grain-overlay"></div>
+    
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">Knight's Travails</h1>
+                <p class="subtitle">Discover the shortest path across the board</p>
+            </div>
+            <div class="decorative-line"></div>
+        </header>
+
+        <main class="main-content">
+            <div class="controls-section">
+                <div class="control-group">
+                    <label class="control-label">
+                        <span class="label-text">Start Position</span>
+                        <div class="input-wrapper">
+                            <input type="number" id="startX" min="0" max="7" value="0" class="coord-input">
+                            <span class="input-separator">,</span>
+                            <input type="number" id="startY" min="0" max="7" value="0" class="coord-input">
+                        </div>
+                    </label>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">
+                        <span class="label-text">End Position</span>
+                        <div class="input-wrapper">
+                            <input type="number" id="endX" min="0" max="7" value="7" class="coord-input">
+                            <span class="input-separator">,</span>
+                            <input type="number" id="endY" min="0" max="7" value="7" class="coord-input">
+                        </div>
+                    </label>
+                </div>
+
+                <button id="findPathBtn" class="find-path-btn">
+                    <span class="btn-text">Find Path</span>
+                    <div class="btn-shine"></div>
+                </button>
+
+                <button id="clearBtn" class="clear-btn">Clear Board</button>
+            </div>
+
+            <div class="board-container">
+                <div class="board-wrapper">
+                    <div id="chessboard" class="chessboard"></div>
+                    <div class="coordinate-labels">
+                        <div class="row-labels">
+                            <span>7</span><span>6</span><span>5</span><span>4</span>
+                            <span>3</span><span>2</span><span>1</span><span>0</span>
+                        </div>
+                        <div class="col-labels">
+                            <span>0</span><span>1</span><span>2</span><span>3</span>
+                            <span>4</span><span>5</span><span>6</span><span>7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <div id="pathOutput" class="path-output">
+                    <div class="output-placeholder">
+                        <svg class="knight-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2L8 6h3v4H8l-2 3h4v7h4v-7h4l-2-3h-3V6h3l-4-4z"/>
+                        </svg>
+                        <p>Select positions and find the optimal path</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>Built with BFS algorithm • Guarantees shortest path</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
