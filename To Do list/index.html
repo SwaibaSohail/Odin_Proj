@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - Modern Todo App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated background -->
+    <div class="cosmic-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="stars"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar glass">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <circle cx="20" cy="20" r="18" stroke="url(#gradient1)" stroke-width="2"/>
+                            <path d="M12 20L18 26L28 14" stroke="url(#gradient1)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <defs>
+                                <linearGradient id="gradient1" x1="0" y1="0" x2="40" y2="40">
+                                    <stop offset="0%" stop-color="#667eea"/>
+                                    <stop offset="100%" stop-color="#764ba2"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="app-title">TaskFlow</h1>
+                        <p class="app-subtitle">your cosmic workspace</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="projects-section">
+                <div class="section-header">
+                    <h2>Projects</h2>
+                    <button class="btn-icon glow" id="addProjectBtn" aria-label="Add project">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 4V16M4 10H16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <ul class="projects-list" id="projectsList">
+                    <!-- Projects will be rendered here -->
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <div class="header-content">
+                    <h2 class="project-title" id="currentProjectTitle">Inbox</h2>
+                    <p class="project-meta" id="projectMeta">0 tasks</p>
+                </div>
+                <button class="btn-primary gradient-btn" id="addTodoBtn">
+                    <span class="btn-icon-inline">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 4V16M4 10H16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                    <span>Add Task</span>
+                    <span class="btn-shine"></span>
+                </button>
+            </header>
+
+            <div class="todos-container" id="todosContainer">
+                <!-- Todos will be rendered here -->
+            </div>
+        </main>
+    </div>
+
+
+    <!-- Modal for adding/editing todos -->
+    <div class="modal" id="todoModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content glass">
+            <div class="modal-header">
+                <h3 id="modalTitle">New Task</h3>
+                <button class="btn-icon" id="closeModalBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            <form id="todoForm">
+                <div class="form-group">
+                    <label for="todoTitle">Title</label>
+                    <input type="text" id="todoTitle" required placeholder="What needs to be done?">
+                </div>
+                <div class="form-group">
+                    <label for="todoDescription">Description</label>
+                    <textarea id="todoDescription" rows="3" placeholder="Add more context..."></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="todoDueDate">Due Date</label>
+                        <input type="date" id="todoDueDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="todoPriority">Priority</label>
+                        <select id="todoPriority">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="todoProject">Project</label>
+                    <select id="todoProject">
+                        <!-- Projects will be populated here -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="todoNotes">Notes</label>
+                    <textarea id="todoNotes" rows="2" placeholder="Extra thoughts..."></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn-primary gradient-btn">
+                        <span>Save Task</span>
+                        <span class="btn-shine"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for adding projects -->
+    <div class="modal" id="projectModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content modal-small glass">
+            <div class="modal-header">
+                <h3>New Project</h3>
+                <button class="btn-icon" id="closeProjectModalBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            <form id="projectForm">
+                <div class="form-group">
+                    <label for="projectName">Project Name</label>
+                    <input type="text" id="projectName" required placeholder="Enter project name">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="cancelProjectBtn">Cancel</button>
+                    <button type="submit" class="btn-primary gradient-btn">
+                        <span>Create Project</span>
+                        <span class="btn-shine"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Detail view modal -->
+    <div class="modal" id="detailModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content glass">
+            <div class="modal-header">
+                <h3 id="detailTitle">Task Details</h3>
+                <button class="btn-icon" id="closeDetailBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="detail-content" id="detailContent">
+                <!-- Detail content will be rendered here -->
+            </div>
+            <div class="modal-actions">
+                <button class="btn-danger" id="deleteDetailBtn">Delete</button>
+                <button class="btn-primary gradient-btn" id="editDetailBtn">
+                    <span>Edit</span>
+                    <span class="btn-shine"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
