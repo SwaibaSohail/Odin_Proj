@@ -28,6 +28,17 @@ A collection of projects built during [The Odin Project](https://www.theodinproj
 - LocalStorage API
 - REST APIs
 
-## Run Locally
-git clone git@github.com:SwaibaSohail/Odin_Proj.git
-cd Odin_Projs
+
+---
+
+## 🏃‍♂️ How to Run Locally
+
+### Prerequisites
+- Any modern web browser
+- (Optional) Local server like VS Code Live Server
+
+### Steps
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/SwaibaSohail/Odin_Proj.git
