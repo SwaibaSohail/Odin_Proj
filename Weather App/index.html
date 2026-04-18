@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atmosphère — Weather</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- Atmospheric layers -->
+<div class="atmo-layer" id="stars-layer"></div>
+<div class="atmo-layer" id="clouds-layer"></div>
+<div class="atmo-layer" id="rain-layer"></div>
+<div class="atmo-layer" id="snow-layer"></div>
+
+<div class="page-wrap">
+  <header>
+    <div class="logo">Atmosphère</div>
+    <div class="tagline">Live Weather Intelligence</div>
+  </header>
+
+  <div class="search-row">
+    <input class="search-input" type="text" id="location-input" placeholder="City, region, or coordinates…" autocomplete="off" />
+    <button class="search-btn" id="search-btn">Forecast</button>
+  </div>
+
+  <div class="unit-toggle">
+    <span class="unit-label" id="lbl-f">°F</span>
+    <div class="toggle-pill" id="unit-toggle" role="switch" aria-checked="false" tabindex="0">
+      <div class="toggle-knob"></div>
+    </div>
+    <span class="unit-label" id="lbl-c">°C</span>
+  </div>
+
+  <div id="loading">
+    <div class="spinner"></div>
+    <div class="loading-text">Reading the skies…</div>
+  </div>
+
+  <div id="error-msg"></div>
+
+  <div id="weather-display">
+    <div class="current-card">
+      <div>
+        <div class="current-location" id="loc-name"></div>
+        <div class="current-date" id="cur-date"></div>
+        <div class="current-condition" id="cur-condition"></div>
+        <div class="current-details" id="cur-details"></div>
+      </div>
+      <div class="temp-display">
+        <div class="temp-big" id="cur-temp"></div>
+        <div class="temp-feels" id="cur-feels"></div>
+        <div class="weather-icon-main" id="cur-icon"></div>
+      </div>
+    </div>
+
+    <div id="gif-section"><img id="weather-gif" src="" alt="Weather animation" /></div>
+
+    <div class="forecast-title">Next 7 Days</div>
+    <div class="forecast-grid" id="forecast-grid"></div>
+
+    <div class="forecast-title">Today by the Hour</div>
+    <div class="hourly-scroll" id="hourly-scroll"></div>
+  </div>
+</div>
+</body>
+</html>
