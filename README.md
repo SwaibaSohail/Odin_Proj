@@ -4,7 +4,7 @@ A collection of projects built during [The Odin Project](https://www.theodinproj
 
 ## Live Demo
 
-[https://swaibasohail.github.io/Odin_Projs/](https://swaibasohail.github.io/Odin_Proj/)
+[https://swaibasohail.github.io/Odin_Proj/](https://swaibasohail.github.io/Odin_Proj/)
 
 ## Projects
 
@@ -15,7 +15,7 @@ A collection of projects built during [The Odin Project](https://www.theodinproj
 | [Library](https://swaibasohail.github.io/Odin_Proj/Library/) | Book tracking app with local storage |
 | [Sign Up Form](https://swaibasohail.github.io/Odin_Proj/Sign%20up%20form/) | Validation form with real-time password check |
 | [To Do List](https://swaibasohail.github.io/Odin_Proj/To%20Do%20list/) | Task manager with projects and due dates |
-| [Weather App](https://swaibasohail.github.io/Odin_Projs/Weather%20App/) | Real-time weather data from OpenWeatherMap API |
+| [Weather App](https://swaibasohail.github.io/Odin_Proj/Weather%20App/) | Real-time weather data from OpenWeatherMap API |
 
 ## Tech Stack
 
@@ -27,5 +27,5 @@ A collection of projects built during [The Odin Project](https://www.theodinproj
 - REST APIs
 
 ## Run Locally
-git clone https://github.com/swaibasohail/Odin_Projs.git
+git clone git@github.com:SwaibaSohail/Odin_Proj.git
 cd Odin_Projs
