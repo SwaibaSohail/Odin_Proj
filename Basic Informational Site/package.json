@@ -1,0 +1,10 @@
+{
+  "name": "basic-informational-site",
+  "version": "1.0.0",
+  "description": "A basic informational site served with Node.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "license": "ISC"
+}
