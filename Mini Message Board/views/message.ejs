@@ -1,0 +1,15 @@
+<%- include("partials/header") %>
+        <h1><%= title %></h1>
+
+        <div class="message">
+            <p class="message-text"><%= message.text %></p>
+            <dl>
+                <dt>Posted by</dt>
+                <dd><%= message.user %></dd>
+                <dt>Added</dt>
+                <dd><%= message.added.toLocaleString() %></dd>
+            </dl>
+        </div>
+
+        <a href="/">← Back to all messages</a>
+<%- include("partials/footer") %>

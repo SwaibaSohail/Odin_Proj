@@ -1,0 +1,16 @@
+{
+  "name": "mini-message-board",
+  "version": "1.0.0",
+  "description": "A mini message board built with Express and EJS",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^7.0.1",
+    "express": "^5.3.0"
+  }
+}

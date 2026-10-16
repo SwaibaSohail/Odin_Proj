@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <script>
+        // Apply the saved theme before the page paints to avoid a flash.
+        try {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+        } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/theme.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <a href="/" class="logo">💬 Mini Messageboard</a>
+        <div class="header-actions">
+            <button type="button" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+            <a href="/new" class="button">+ New Message</a>
+        </div>
+    </header>
+    <main>

@@ -1,0 +1,188 @@
+:root {
+    color-scheme: light;
+    --bg: #f4f5fb;
+    --text: #333;
+    --muted: #888;
+    --card: white;
+    --border: #ccc;
+    --link: #667eea;
+    --shadow: rgba(0, 0, 0, 0.08);
+    --header-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --accent: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        color-scheme: dark;
+        --bg: #14151f;
+        --text: #e4e4ef;
+        --muted: #9a9ab0;
+        --card: #1f2030;
+        --border: #3a3b52;
+        --link: #9aa8ff;
+        --shadow: rgba(0, 0, 0, 0.4);
+        --header-bg: linear-gradient(135deg, #3b4a9e 0%, #4b2f6e 100%);
+    }
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #14151f;
+    --text: #e4e4ef;
+    --muted: #9a9ab0;
+    --card: #1f2030;
+    --border: #3a3b52;
+    --link: #9aa8ff;
+    --shadow: rgba(0, 0, 0, 0.4);
+    --header-bg: linear-gradient(135deg, #3b4a9e 0%, #4b2f6e 100%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: var(--header-bg);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    color: white;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+main {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+a {
+    color: var(--link);
+}
+
+.button {
+    display: inline-block;
+    background: white;
+    color: #764ba2;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.theme-toggle {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+.messages {
+    list-style: none;
+}
+
+.message {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+.message-meta {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.date {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.message-text {
+    margin: 10px 0;
+    overflow-wrap: anywhere;
+}
+
+.message-text:first-child {
+    margin-top: 0;
+}
+
+.open-link {
+    font-weight: 600;
+}
+
+.message dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 5px 15px;
+    color: var(--muted);
+}
+
+.message dt {
+    font-weight: 600;
+}
+
+.message-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+.message-form input,
+.message-form textarea {
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+    font: inherit;
+    margin-bottom: 10px;
+}
+
+.message-form .button {
+    align-self: flex-start;
+    background: var(--accent);
+    color: white;
+}

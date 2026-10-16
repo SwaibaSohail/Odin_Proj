@@ -1,0 +1,13 @@
+<%- include("partials/header") %>
+        <h1><%= title %></h1>
+
+        <form method="POST" action="/new" class="message-form">
+            <label for="messageUser">Your name</label>
+            <input type="text" id="messageUser" name="messageUser" maxlength="50" required>
+
+            <label for="messageText">Message</label>
+            <textarea id="messageText" name="messageText" rows="4" maxlength="500" required></textarea>
+
+            <button type="submit" class="button">Send</button>
+        </form>
+<%- include("partials/footer") %>
