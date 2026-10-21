@@ -1,0 +1,48 @@
+<%- include("../partials/header") %>
+        <% const status = stockStatus(item.quantity); %>
+        <nav class="breadcrumbs">
+            <a href="/">Categories</a> /
+            <a href="/categories/<%= item.category_id %>"><%= item.category_name %></a> /
+            <span><%= item.name %></span>
+        </nav>
+
+        <article class="detail-card">
+            <div class="detail-head">
+                <div>
+                    <% if (item.brand) { %><p class="eyebrow"><%= item.brand %></p><% } %>
+                    <h1><%= item.name %></h1>
+                </div>
+                <span class="badge badge-<%= status.className %>"><%= status.label %></span>
+            </div>
+
+            <p class="detail-description"><%= item.description || "No description." %></p>
+
+            <dl class="detail-grid">
+                <div>
+                    <dt>Price</dt>
+                    <dd><%= formatPrice(item.price) %></dd>
+                </div>
+                <div>
+                    <dt>In stock</dt>
+                    <dd><%= item.quantity %></dd>
+                </div>
+                <div>
+                    <dt>Stock value</dt>
+                    <dd><%= formatPrice(item.price * item.quantity) %></dd>
+                </div>
+                <div>
+                    <dt>Category</dt>
+                    <dd><a href="/categories/<%= item.category_id %>"><%= item.category_name %></a></dd>
+                </div>
+                <div>
+                    <dt>Added</dt>
+                    <dd><%= item.created_at.toLocaleDateString("en-US", { dateStyle: "medium" }) %></dd>
+                </div>
+            </dl>
+
+            <div class="actions">
+                <a href="/items/<%= item.id %>/edit" class="btn btn-secondary">Edit</a>
+                <a href="/items/<%= item.id %>/delete" class="btn btn-danger">Delete</a>
+            </div>
+        </article>
+<%- include("../partials/footer") %>

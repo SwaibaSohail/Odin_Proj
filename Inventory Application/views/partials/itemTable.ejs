@@ -1,0 +1,30 @@
+<div class="table-wrap">
+    <table class="item-table">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <% if (showCategory) { %><th>Category</th><% } %>
+                <th class="num">Price</th>
+                <th class="num">Qty</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% items.forEach((item) => { %>
+                <% const status = stockStatus(item.quantity); %>
+                <tr>
+                    <td>
+                        <a href="/items/<%= item.id %>" class="item-link"><%= item.name %></a>
+                        <% if (item.brand) { %><div class="muted small"><%= item.brand %></div><% } %>
+                    </td>
+                    <% if (showCategory) { %>
+                        <td><a href="/categories/<%= item.category_id %>"><%= item.category_name %></a></td>
+                    <% } %>
+                    <td class="num"><%= formatPrice(item.price) %></td>
+                    <td class="num"><%= item.quantity %></td>
+                    <td><span class="badge badge-<%= status.className %>"><%= status.label %></span></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>

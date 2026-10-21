@@ -1,0 +1,17 @@
+<%- include("../partials/header") %>
+        <section class="page-head">
+            <div>
+                <h1>All Items</h1>
+                <p class="muted"><%= items.length %> <%= items.length === 1 ? "product" : "products" %> across every category.</p>
+            </div>
+            <div class="actions">
+                <a href="/items/new" class="btn btn-primary">+ New Item</a>
+            </div>
+        </section>
+
+        <% if (items.length === 0) { %>
+            <div class="empty">No items yet. <a href="/items/new">Add the first one</a>.</div>
+        <% } else { %>
+            <%- include("../partials/itemTable", { items, showCategory: true }) %>
+        <% } %>
+<%- include("../partials/footer") %>

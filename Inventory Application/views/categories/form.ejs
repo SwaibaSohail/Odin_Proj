@@ -1,0 +1,25 @@
+<%- include("../partials/header") %>
+        <nav class="breadcrumbs"><a href="/">Categories</a> / <span><%= title %></span></nav>
+
+        <div class="form-card">
+            <h1><%= title %></h1>
+            <%- include("../partials/errors") %>
+
+            <form method="POST" action="<%= action %>" class="form">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" maxlength="100" required value="<%= category.name %>">
+
+                <label for="description">Description <span class="optional">(optional)</span></label>
+                <textarea id="description" name="description" rows="3" maxlength="500"><%= category.description %></textarea>
+
+                <% if (isEdit) { %>
+                    <%- include("../partials/adminPassword", { hint: "Enter the admin password to save your changes." }) %>
+                <% } %>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary"><%= isEdit ? "Save Changes" : "Create Category" %></button>
+                    <a href="<%= isEdit ? `/categories/${category.id}` : '/' %>" class="btn btn-ghost">Cancel</a>
+                </div>
+            </form>
+        </div>
+<%- include("../partials/footer") %>

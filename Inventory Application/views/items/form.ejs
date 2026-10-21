@@ -1,0 +1,60 @@
+<%- include("../partials/header") %>
+        <nav class="breadcrumbs"><a href="/items">All Items</a> / <span><%= title %></span></nav>
+
+        <div class="form-card">
+            <h1><%= title %></h1>
+
+            <% if (categories.length === 0) { %>
+                <div class="alert alert-warning" role="alert">
+                    You need at least one category before you can add items.
+                    <a href="/categories/new">Create a category</a>.
+                </div>
+            <% } else { %>
+                <%- include("../partials/errors") %>
+
+                <form method="POST" action="<%= action %>" class="form">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" maxlength="150" required value="<%= item.name %>">
+
+                    <div class="form-row">
+                        <div>
+                            <label for="brand">Brand <span class="optional">(optional)</span></label>
+                            <input type="text" id="brand" name="brand" maxlength="100" value="<%= item.brand %>">
+                        </div>
+                        <div>
+                            <label for="categoryId">Category</label>
+                            <select id="categoryId" name="categoryId" required>
+                                <option value="">Choose a category</option>
+                                <% categories.forEach((category) => { %>
+                                    <option value="<%= category.id %>" <%= category.id === item.categoryId ? "selected" : "" %>><%= category.name %></option>
+                                <% }) %>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div>
+                            <label for="price">Price ($)</label>
+                            <input type="number" id="price" name="price" min="0" max="99999999.99" step="0.01" required value="<%= item.price %>">
+                        </div>
+                        <div>
+                            <label for="quantity">Quantity in stock</label>
+                            <input type="number" id="quantity" name="quantity" min="0" max="1000000" step="1" required value="<%= item.quantity %>">
+                        </div>
+                    </div>
+
+                    <label for="description">Description <span class="optional">(optional)</span></label>
+                    <textarea id="description" name="description" rows="4" maxlength="1000"><%= item.description %></textarea>
+
+                    <% if (isEdit) { %>
+                        <%- include("../partials/adminPassword", { hint: "Enter the admin password to save your changes." }) %>
+                    <% } %>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary"><%= isEdit ? "Save Changes" : "Create Item" %></button>
+                        <a href="<%= isEdit ? `/items/${item.id}` : (item.categoryId ? `/categories/${item.categoryId}` : '/items') %>" class="btn btn-ghost">Cancel</a>
+                    </div>
+                </form>
+            <% } %>
+        </div>
+<%- include("../partials/footer") %>

@@ -1,0 +1,25 @@
+<%- include("../partials/header") %>
+        <nav class="breadcrumbs">
+            <a href="/">Categories</a> /
+            <a href="/categories/<%= item.category_id %>"><%= item.category_name %></a> /
+            <a href="/items/<%= item.id %>"><%= item.name %></a> /
+            <span>Delete</span>
+        </nav>
+
+        <div class="form-card">
+            <h1>Delete "<%= item.name %>"?</h1>
+            <%- include("../partials/errors") %>
+            <p>
+                This will permanently remove the item and its <%= item.quantity %>
+                <%= item.quantity === 1 ? "unit" : "units" %> of stock from <strong><%= item.category_name %></strong>.
+            </p>
+
+            <form method="POST" action="/items/<%= item.id %>/delete" class="form">
+                <%- include("../partials/adminPassword", { hint: "Enter the admin password to confirm." }) %>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-danger">Delete Item</button>
+                    <a href="/items/<%= item.id %>" class="btn btn-ghost">Cancel</a>
+                </div>
+            </form>
+        </div>
+<%- include("../partials/footer") %>

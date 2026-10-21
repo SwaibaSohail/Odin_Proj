@@ -1,0 +1,49 @@
+<%- include("partials/header") %>
+        <section class="page-head">
+            <div>
+                <h1>Store Inventory</h1>
+                <p class="muted">Choose a category to see its items, or add something new.</p>
+            </div>
+            <div class="actions">
+                <a href="/categories/new" class="btn btn-secondary">+ New Category</a>
+                <a href="/items/new" class="btn btn-primary">+ New Item</a>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="stat">
+                <span class="stat-value"><%= stats.item_count %></span>
+                <span class="stat-label">Products</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value"><%= stats.total_stock %></span>
+                <span class="stat-label">Units in stock</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value"><%= formatPrice(stats.total_value) %></span>
+                <span class="stat-label">Inventory value</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value"><%= stats.out_of_stock %></span>
+                <span class="stat-label">Out of stock</span>
+            </div>
+        </section>
+
+        <h2>Categories</h2>
+        <% if (categories.length === 0) { %>
+            <div class="empty">No categories yet. <a href="/categories/new">Create the first one</a>.</div>
+        <% } else { %>
+            <div class="card-grid">
+                <% categories.forEach((category) => { %>
+                    <a href="/categories/<%= category.id %>" class="card category-card">
+                        <h3><%= category.name %></h3>
+                        <p class="muted"><%= category.description || "No description." %></p>
+                        <div class="card-footer">
+                            <span><%= category.item_count %> <%= category.item_count === 1 ? "product" : "products" %></span>
+                            <span><%= category.total_stock %> in stock</span>
+                        </div>
+                    </a>
+                <% }) %>
+            </div>
+        <% } %>
+<%- include("partials/footer") %>

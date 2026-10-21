@@ -1,0 +1,44 @@
+<%- include("../partials/header") %>
+        <nav class="breadcrumbs">
+            <a href="/">Categories</a> / <a href="/categories/<%= category.id %>"><%= category.name %></a> / <span>Delete</span>
+        </nav>
+
+        <div class="form-card">
+            <h1>Delete "<%= category.name %>"?</h1>
+
+            <% if (items.length > 0) { %>
+                <div class="alert alert-warning" role="alert">
+                    <strong>This category still has <%= items.length %> <%= items.length === 1 ? "item" : "items" %>.</strong>
+                    A category can only be deleted once it's empty. Move these items to another category
+                    or delete them first:
+                </div>
+
+                <ul class="item-list">
+                    <% items.forEach((item) => { %>
+                        <li>
+                            <a href="/items/<%= item.id %>"><%= item.name %></a>
+                            <span class="item-list-actions">
+                                <a href="/items/<%= item.id %>/edit">Move</a> ·
+                                <a href="/items/<%= item.id %>/delete" class="danger-link">Delete</a>
+                            </span>
+                        </li>
+                    <% }) %>
+                </ul>
+
+                <div class="form-actions">
+                    <a href="/categories/<%= category.id %>" class="btn btn-ghost">Back to category</a>
+                </div>
+            <% } else { %>
+                <%- include("../partials/errors") %>
+                <p>This category is empty and will be permanently deleted.</p>
+
+                <form method="POST" action="/categories/<%= category.id %>/delete" class="form">
+                    <%- include("../partials/adminPassword", { hint: "Enter the admin password to confirm." }) %>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-danger">Delete Category</button>
+                        <a href="/categories/<%= category.id %>" class="btn btn-ghost">Cancel</a>
+                    </div>
+                </form>
+            <% } %>
+        </div>
+<%- include("../partials/footer") %>
