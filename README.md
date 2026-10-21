@@ -18,6 +18,7 @@ A collection of projects built during [The Odin Project](https://www.theodinproj
 | [Weather App](https://swaibasohail.github.io/Odin_Proj/Weather%20App/) | Real-time weather data from OpenWeatherMap API |
 | [My Landing Page](https://swaibasohail.github.io/Odin_Proj/My_Landing_Page/) | Author tribute page with book gallery |
 | [Mini Message Board](https://github.com/SwaibaSohail/Odin_Proj/tree/main/Mini%20Message%20Board) | Express + EJS message board with dark mode (runs locally with Node.js) |
+| [Inventory Application](https://github.com/SwaibaSohail/Odin_Proj/tree/main/Inventory%20Application) | Music store inventory with full CRUD, PostgreSQL and admin-protected edits (runs locally with Node.js) |
 
 
 ## Tech Stack
@@ -28,7 +29,8 @@ A collection of projects built during [The Odin Project](https://www.theodinproj
 - Webpack (Restaurant Page)
 - LocalStorage API
 - REST APIs
-- Node.js, Express and EJS (Mini Message Board)
+- Node.js, Express and EJS (Mini Message Board, Inventory Application)
+- PostgreSQL (Inventory Application)
 
 
 ---
@@ -38,7 +40,8 @@ A collection of projects built during [The Odin Project](https://www.theodinproj
 ### Prerequisites
 - Any modern web browser
 - (Optional) Local server like VS Code Live Server
-- [Node.js](https://nodejs.org/) for the Mini Message Board
+- [Node.js](https://nodejs.org/) for the Mini Message Board and Inventory Application
+- [PostgreSQL](https://www.postgresql.org/download/) for the Inventory Application
 
 ### Steps
 
@@ -56,3 +59,5 @@ A collection of projects built during [The Odin Project](https://www.theodinproj
    npm start
    ```
    Then open [http://localhost:3000](http://localhost:3000).
+
+4. **Run the Inventory Application** (needs Node.js and PostgreSQL): follow the setup steps in [its README](Inventory%20Application/README.md).
