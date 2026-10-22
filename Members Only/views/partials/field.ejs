@@ -1,0 +1,17 @@
+<%# A labelled input with its validation error underneath. %>
+<% const error = locals.error; %>
+<div class="field<%= error ? ' has-error' : '' %>">
+    <label for="<%= name %>"><%= label %></label>
+    <input
+        type="<%= type %>"
+        id="<%= name %>"
+        name="<%= name %>"
+        value="<%= locals.value ?? '' %>"
+        autocomplete="<%= autocomplete %>"
+        <% if (locals.maxlength) { %>maxlength="<%= maxlength %>"<% } %>
+        <% if (error) { %>aria-invalid="true" aria-describedby="<%= name %>-error"<% } %>
+        required>
+    <% if (error) { %>
+        <p class="field-error" id="<%= name %>-error"><%= error.msg %></p>
+    <% } %>
+</div>

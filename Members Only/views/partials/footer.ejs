@@ -1,0 +1,10 @@
+    </main>
+    <footer class="site-footer">
+        <span>Members Only · anonymous notes from the clubhouse</span>
+        <% if (locals.currentUser && !currentUser.is_admin) { %>
+            <a href="/admin">Admin access</a>
+        <% } %>
+    </footer>
+</body>
+
+</html>

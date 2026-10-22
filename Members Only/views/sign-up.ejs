@@ -1,0 +1,25 @@
+<%- include("partials/header") %>
+        <div class="form-card">
+            <h1>Sign up</h1>
+            <p class="muted">Create an account to post messages. You'll need the club passcode to see who wrote what.</p>
+
+            <form method="POST" action="/sign-up" class="form">
+                <div class="form-row">
+                    <%- include("partials/field", { name: "firstName", label: "First name", type: "text", value: values.firstName, error: fieldErrors.firstName, autocomplete: "given-name", maxlength: 100 }) %>
+                    <%- include("partials/field", { name: "lastName", label: "Last name", type: "text", value: values.lastName, error: fieldErrors.lastName, autocomplete: "family-name", maxlength: 100 }) %>
+                </div>
+                <%- include("partials/field", { name: "email", label: "Email", type: "email", value: values.email, error: fieldErrors.email, autocomplete: "email", maxlength: 255 }) %>
+                <div class="form-row">
+                    <%- include("partials/field", { name: "password", label: "Password", type: "password", value: "", error: fieldErrors.password, autocomplete: "new-password" }) %>
+                    <%- include("partials/field", { name: "confirmPassword", label: "Confirm password", type: "password", value: "", error: fieldErrors.confirmPassword, autocomplete: "new-password" }) %>
+                </div>
+                <% if (!fieldErrors.password) { %><p class="hint">At least 8 characters.</p><% } %>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Create account</button>
+                </div>
+            </form>
+
+            <p class="form-switch">Already have an account? <a href="/log-in">Log in</a></p>
+        </div>
+<%- include("partials/footer") %>

@@ -1,0 +1,45 @@
+<% const user = locals.currentUser; -%>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> · Members Only</title>
+    <script>
+        // Apply the saved theme before the page paints to avoid a flash.
+        try {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+        } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/main.js" defer></script>
+</head>
+
+<body>
+    <header class="site-header">
+        <a href="/" class="logo">Members <span class="logo-tag">Only</span></a>
+        <nav class="site-nav">
+            <% if (user) { %>
+                <% const role = user.is_admin ? "admin" : user.is_member ? "member" : "guest"; %>
+                <a href="/messages/new" class="btn btn-primary btn-small">New message</a>
+                <% if (!user.is_member) { %><a href="/join">Join the club</a><% } %>
+                <span class="user-chip">
+                    <%= user.first_name %>
+                    <span class="role role-<%= role %>"><%= role === "guest" ? "Not a member" : role %></span>
+                </span>
+                <form method="POST" action="/log-out" class="inline-form">
+                    <button type="submit" class="link-button">Log out</button>
+                </form>
+            <% } else { %>
+                <a href="/log-in">Log in</a>
+                <a href="/sign-up" class="btn btn-primary btn-small">Sign up</a>
+            <% } %>
+            <button type="button" class="theme-toggle" aria-label="Toggle dark mode">Dark</button>
+        </nav>
+    </header>
+    <main>
+        <% if (locals.flash) { %>
+            <p class="flash" role="status"><%= flash %></p>
+        <% } %>
