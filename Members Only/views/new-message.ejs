@@ -1,0 +1,27 @@
+<%- include("partials/header") %>
+        <div class="form-card">
+            <h1>New message</h1>
+            <p class="muted">
+                Everyone can read your title and message.
+                Only members will see that you wrote it.
+            </p>
+
+            <form method="POST" action="/messages/new" class="form">
+                <%- include("partials/field", { name: "title", label: "Title", type: "text", value: values.title, error: fieldErrors.title, autocomplete: "off", maxlength: 100 }) %>
+
+                <div class="field<%= fieldErrors.body ? ' has-error' : '' %>">
+                    <label for="body">Message</label>
+                    <textarea id="body" name="body" rows="6" maxlength="2000" required
+                        <% if (fieldErrors.body) { %>aria-invalid="true" aria-describedby="body-error"<% } %>><%= values.body %></textarea>
+                    <% if (fieldErrors.body) { %>
+                        <p class="field-error" id="body-error"><%= fieldErrors.body.msg %></p>
+                    <% } %>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Post message</button>
+                    <a href="/" class="btn btn-ghost">Cancel</a>
+                </div>
+            </form>
+        </div>
+<%- include("partials/footer") %>

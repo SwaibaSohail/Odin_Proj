@@ -1,0 +1,53 @@
+<%- include("partials/header") %>
+        <section class="board-head">
+            <h1>The board</h1>
+            <p class="muted">
+                <%= messages.length %> <%= messages.length === 1 ? "message" : "messages" %>.
+                <%= isMember ? "You can see who wrote each one." : "Authors and dates are hidden from non-members." %>
+            </p>
+        </section>
+
+        <% if (!locals.currentUser) { %>
+            <aside class="notice">
+                <strong>You're seeing the outsider's view.</strong>
+                <a href="/sign-up">Sign up</a> and join the club to find out who wrote what,
+                or <a href="/log-in">log in</a> if you already have an account.
+            </aside>
+        <% } else if (!isMember) { %>
+            <aside class="notice">
+                <strong>Want to know who wrote these?</strong>
+                <a href="/join">Enter the club passcode</a> to become a member.
+            </aside>
+        <% } %>
+
+        <% if (messages.length === 0) { %>
+            <p class="empty">
+                No messages yet.
+                <% if (locals.currentUser) { %><a href="/messages/new">Write the first one</a>.<% } %>
+            </p>
+        <% } else { %>
+            <ol class="message-list">
+                <% messages.forEach((message) => { %>
+                    <li class="message">
+                        <div class="message-meta">
+                            <% if (message.author) { %>
+                                <span class="author"><%= message.author %></span>
+                                <time class="local-time" datetime="<%= message.createdAt.toISOString() %>"><%= formatDate(message.createdAt) %></time>
+                            <% } else { %>
+                                <span class="redacted redacted-name" aria-hidden="true"></span>
+                                <span class="redacted redacted-date" aria-hidden="true"></span>
+                                <span class="visually-hidden">Author and date hidden</span>
+                            <% } %>
+                        </div>
+                        <h2 class="message-title"><%= message.title %></h2>
+                        <p class="message-body"><%= message.body %></p>
+                        <% if (locals.currentUser && currentUser.is_admin) { %>
+                            <form method="POST" action="/messages/<%= message.id %>/delete" class="delete-form" data-confirm="Delete &quot;<%= message.title %>&quot;?">
+                                <button type="submit" class="btn btn-danger btn-small">Delete</button>
+                            </form>
+                        <% } %>
+                    </li>
+                <% }) %>
+            </ol>
+        <% } %>
+<%- include("partials/footer") %>
