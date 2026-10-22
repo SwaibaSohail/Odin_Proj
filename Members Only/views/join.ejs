@@ -1,0 +1,22 @@
+<%- include("partials/header") %>
+        <div class="form-card form-card-narrow">
+            <h1>Join the club</h1>
+
+            <% if (currentUser.is_member) { %>
+                <p>You're already a member. <a href="/">Back to the board</a></p>
+            <% } else { %>
+                <p class="muted">Members can see who wrote each message and when. Ask around for the passcode.</p>
+                <%- include("partials/errors") %>
+
+                <form method="POST" action="/join" class="form">
+                    <label for="passcode">Club passcode</label>
+                    <input type="password" id="passcode" name="passcode" autocomplete="off" required>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Join</button>
+                        <a href="/" class="btn btn-ghost">Not now</a>
+                    </div>
+                </form>
+            <% } %>
+        </div>
+<%- include("partials/footer") %>
