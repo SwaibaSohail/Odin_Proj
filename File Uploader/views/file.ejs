@@ -1,0 +1,50 @@
+<%- include("partials/header") %>
+        <nav class="breadcrumbs" aria-label="Folder path">
+            <a href="/drive">My Drive</a>
+            <% path.forEach((step) => { %>
+                <span class="sep">/</span>
+                <a href="/folders/<%= step.id %>"><%= step.name %></a>
+            <% }) %>
+            <span class="sep">/</span>
+            <span aria-current="page"><%= file.name %></span>
+        </nav>
+
+        <article class="detail-card">
+            <div class="detail-head">
+                <span class="type-badge type-badge-large"><%= fileTypeLabel(file.name) %></span>
+                <h1><%= file.name %></h1>
+            </div>
+
+            <dl class="detail-grid">
+                <div>
+                    <dt>Size</dt>
+                    <dd><%= formatBytes(file.size) %> <span class="muted">(<%= file.size.toLocaleString("en-US") %> bytes)</span></dd>
+                </div>
+                <div>
+                    <dt>Type</dt>
+                    <dd><%= file.mimeType %></dd>
+                </div>
+                <div>
+                    <dt>Uploaded</dt>
+                    <dd><time class="local-time" datetime="<%= file.createdAt.toISOString() %>"><%= formatDate(file.createdAt) %></time></dd>
+                </div>
+                <div>
+                    <dt>Folder</dt>
+                    <dd>
+                        <% if (path.length > 0) { %>
+                            <a href="/folders/<%= path[path.length - 1].id %>"><%= path[path.length - 1].name %></a>
+                        <% } else { %>
+                            <a href="/drive">My Drive</a>
+                        <% } %>
+                    </dd>
+                </div>
+            </dl>
+
+            <div class="actions">
+                <a href="/files/<%= file.id %>/download" class="btn btn-primary">Download</a>
+                <form method="POST" action="/files/<%= file.id %>/delete" class="inline-form" data-confirm="Delete this file? This can't be undone.">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </article>
+<%- include("partials/footer") %>
