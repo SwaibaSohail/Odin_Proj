@@ -1,0 +1,22 @@
+<%- include("partials/header") %>
+        <div class="form-card form-card-narrow">
+            <h1>Delete "<%= folder.name %>"?</h1>
+            <% if (fileCount === 0 && subfolderCount === 0) { %>
+                <p>This folder is empty.</p>
+            <% } else { %>
+                <p class="alert alert-error">
+                    This also deletes
+                    <% const parts = []; %>
+                    <% if (fileCount > 0) parts.push(`${fileCount} ${fileCount === 1 ? "file" : "files"}`); %>
+                    <% if (subfolderCount > 0) parts.push(`${subfolderCount} ${subfolderCount === 1 ? "subfolder" : "subfolders"}`); %>
+                    <strong><%= parts.join(" and ") %></strong> inside it. This can't be undone.
+                </p>
+            <% } %>
+            <form method="POST" action="/folders/<%= folder.id %>/delete" class="form">
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-danger">Delete folder</button>
+                    <a href="/folders/<%= folder.id %>" class="btn btn-ghost">Cancel</a>
+                </div>
+            </form>
+        </div>
+<%- include("partials/footer") %>

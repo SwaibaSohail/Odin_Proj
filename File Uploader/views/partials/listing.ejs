@@ -1,0 +1,46 @@
+<%# A table of folders and files. Expects: folders, files, folderLink(folder), fileLink(file), emptyMessage %>
+<% if (folders.length === 0 && files.length === 0) { %>
+    <p class="empty"><%= emptyMessage %></p>
+<% } else { %>
+    <div class="table-wrap">
+        <table class="listing">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th class="num">Size</th>
+                    <th class="added">Added</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% folders.forEach((folder) => { %>
+                    <tr>
+                        <td>
+                            <a class="entry" href="<%= folderLink(folder) %>">
+                                <%- include("icon-folder") %>
+                                <span class="entry-name"><%= folder.name %></span>
+                            </a>
+                        </td>
+                        <td class="num muted">Folder</td>
+                        <td class="added">
+                            <time class="local-time" datetime="<%= folder.createdAt.toISOString() %>"><%= formatDate(folder.createdAt) %></time>
+                        </td>
+                    </tr>
+                <% }) %>
+                <% files.forEach((file) => { %>
+                    <tr>
+                        <td>
+                            <a class="entry" href="<%= fileLink(file) %>">
+                                <span class="type-badge"><%= fileTypeLabel(file.name) %></span>
+                                <span class="entry-name"><%= file.name %></span>
+                            </a>
+                        </td>
+                        <td class="num"><%= formatBytes(file.size) %></td>
+                        <td class="added">
+                            <time class="local-time" datetime="<%= file.createdAt.toISOString() %>"><%= formatDate(file.createdAt) %></time>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+<% } %>

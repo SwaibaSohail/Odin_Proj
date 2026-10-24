@@ -1,0 +1,12 @@
+<%- include("partials/header") %>
+        <div class="form-card form-card-narrow">
+            <h1>Rename folder</h1>
+            <form method="POST" action="/folders/<%= folder.id %>/rename" class="form">
+                <%- include("partials/field", { name: "name", label: "Folder name", type: "text", value: name, error: error ? { msg: error } : null, autocomplete: "off", maxlength: 100 }) %>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a href="/folders/<%= folder.id %>" class="btn btn-ghost">Cancel</a>
+                </div>
+            </form>
+        </div>
+<%- include("partials/footer") %>

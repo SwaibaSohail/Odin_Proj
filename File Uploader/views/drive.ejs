@@ -1,0 +1,94 @@
+<%- include("partials/header") %>
+        <nav class="breadcrumbs" aria-label="Folder path">
+            <% if (!folder) { %>
+                <span aria-current="page">My Drive</span>
+            <% } else { %>
+                <a href="/drive">My Drive</a>
+                <% path.forEach((step, index) => { %>
+                    <span class="sep">/</span>
+                    <% if (index === path.length - 1) { %>
+                        <span aria-current="page"><%= step.name %></span>
+                    <% } else { %>
+                        <a href="/folders/<%= step.id %>"><%= step.name %></a>
+                    <% } %>
+                <% }) %>
+            <% } %>
+        </nav>
+
+        <section class="page-head">
+            <h1><%= folder ? folder.name : "My Drive" %></h1>
+            <% if (folder) { %>
+                <div class="actions">
+                    <a href="#sharing" class="btn btn-small">Share</a>
+                    <a href="/folders/<%= folder.id %>/rename" class="btn btn-small">Rename</a>
+                    <a href="/folders/<%= folder.id %>/delete" class="btn btn-small btn-danger">Delete</a>
+                </div>
+            <% } %>
+        </section>
+
+        <% const base = folder ? `/folders/${folder.id}` : "/drive"; %>
+        <section class="toolbar">
+            <form method="POST" action="<%= base %>/upload" enctype="multipart/form-data" class="panel">
+                <label for="file" class="panel-title">Upload a file</label>
+                <div class="inline-fields">
+                    <input type="file" id="file" name="file" accept="<%= accept %>" required>
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </div>
+                <p class="hint">Up to <%= maxFileSize %>. <%= allowedTypes %>.</p>
+            </form>
+
+            <form method="POST" action="<%= base %>/folders" class="panel<%= newFolderError ? ' has-error' : '' %>">
+                <label for="name" class="panel-title">New folder</label>
+                <div class="inline-fields">
+                    <input type="text" id="name" name="name" maxlength="100" placeholder="Folder name" value="<%= newFolderName %>" required
+                        <% if (newFolderError) { %>aria-invalid="true" aria-describedby="name-error"<% } %>>
+                    <button type="submit" class="btn">Create</button>
+                </div>
+                <% if (newFolderError) { %>
+                    <p class="field-error" id="name-error"><%= newFolderError %></p>
+                <% } %>
+            </form>
+        </section>
+
+        <%- include("partials/listing", {
+            folders,
+            files,
+            folderLink: (f) => `/folders/${f.id}`,
+            fileLink: (file) => `/files/${file.id}`,
+            emptyMessage: folder ? "This folder is empty." : "Nothing here yet. Upload a file or create a folder.",
+        }) %>
+
+        <% if (folder) { %>
+            <section class="panel sharing" id="sharing">
+                <h2 class="panel-title">Share this folder</h2>
+                <p class="muted">
+                    Anyone with the link can see and download everything in this folder, including its subfolders.
+                    They don't need an account.
+                </p>
+                <form method="POST" action="/folders/<%= folder.id %>/share" class="inline-fields">
+                    <label for="days">Link works for</label>
+                    <input type="number" id="days" name="days" min="1" max="30" value="7" required class="days-input">
+                    <span>days</span>
+                    <button type="submit" class="btn btn-primary">Create link</button>
+                </form>
+
+                <% if (shareLinks.length > 0) { %>
+                    <ul class="share-links">
+                        <% shareLinks.forEach((link) => { %>
+                            <% const url = shareBaseUrl + link.id; %>
+                            <li>
+                                <input type="text" readonly value="<%= url %>" class="share-url" aria-label="Share link">
+                                <button type="button" class="btn btn-small" data-copy="<%= url %>">Copy</button>
+                                <span class="muted expires">
+                                    Expires <time class="local-time" datetime="<%= link.expiresAt.toISOString() %>"><%= formatDate(link.expiresAt) %></time>
+                                </span>
+                                <form method="POST" action="/share-links/<%= link.id %>/delete" class="inline-form" data-confirm="Stop sharing? This link will stop working.">
+                                    <button type="submit" class="btn btn-small btn-danger">Stop sharing</button>
+                                </form>
+                            </li>
+                        <% }) %>
+                    </ul>
+                <% } %>
+            </section>
+        <% } %>
+<%- include("partials/footer") %>
