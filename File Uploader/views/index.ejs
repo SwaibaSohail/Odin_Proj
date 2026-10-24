@@ -1,0 +1,18 @@
+<%- include("partials/header") %>
+        <section class="landing">
+            <h1>Your files, in one place.</h1>
+            <p class="lead">
+                Upload files, sort them into folders, and share a folder with anyone using a link that expires
+                when you say so.
+            </p>
+            <div class="actions">
+                <a href="/sign-up" class="btn btn-primary">Create an account</a>
+                <a href="/log-in" class="btn">Log in</a>
+            </div>
+            <ul class="landing-points">
+                <li><strong>Folders inside folders.</strong> Rename or delete them any time.</li>
+                <li><strong>Uploads up to <%= maxFileSize %>.</strong> Images, documents, spreadsheets, audio and more.</li>
+                <li><strong>Share links.</strong> Anyone with the link can download, until it expires.</li>
+            </ul>
+        </section>
+<%- include("partials/footer") %>

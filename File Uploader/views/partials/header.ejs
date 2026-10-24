@@ -1,0 +1,41 @@
+<% const user = locals.currentUser; -%>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> · Filebox</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <script>
+        // Apply the saved theme before the page paints to avoid a flash.
+        try {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+        } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/main.js" defer></script>
+</head>
+
+<body>
+    <header class="site-header">
+        <a href="<%= user ? '/drive' : '/' %>" class="logo">File<span class="logo-tag">box</span></a>
+        <nav class="site-nav">
+            <% if (user) { %>
+                <a href="/drive">My Drive</a>
+                <span class="user-name"><%= user.name %></span>
+                <form method="POST" action="/log-out" class="inline-form">
+                    <button type="submit" class="link-button">Log out</button>
+                </form>
+            <% } else { %>
+                <a href="/log-in">Log in</a>
+                <a href="/sign-up" class="btn btn-primary btn-small">Sign up</a>
+            <% } %>
+            <button type="button" class="theme-toggle" aria-label="Toggle dark mode">Dark</button>
+        </nav>
+    </header>
+    <main>
+        <% if (locals.flash) { %>
+            <p class="flash flash-<%= flash.type %>" role="<%= flash.type === 'error' ? 'alert' : 'status' %>"><%= flash.text %></p>
+        <% } %>

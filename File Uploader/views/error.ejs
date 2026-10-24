@@ -1,0 +1,7 @@
+<%- include("partials/header") %>
+        <div class="form-card form-card-narrow center">
+            <h1>Something went wrong</h1>
+            <p>Sorry, we couldn't complete that request. Please try again.</p>
+            <a href="<%= locals.currentUser ? '/drive' : '/' %>" class="btn btn-primary">Go back</a>
+        </div>
+<%- include("partials/footer") %>

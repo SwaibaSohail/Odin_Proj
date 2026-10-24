@@ -1,0 +1,7 @@
+<%- include("partials/header") %>
+        <div class="form-card form-card-narrow center">
+            <h1>404</h1>
+            <p><%= message %></p>
+            <a href="<%= locals.currentUser ? '/drive' : '/' %>" class="btn btn-primary">Go back</a>
+        </div>
+<%- include("partials/footer") %>

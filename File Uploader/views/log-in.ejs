@@ -1,0 +1,17 @@
+<%- include("partials/header") %>
+        <div class="form-card form-card-narrow">
+            <h1>Log in</h1>
+            <%- include("partials/errors") %>
+
+            <form method="POST" action="/log-in" class="form">
+                <%- include("partials/field", { name: "email", label: "Email", type: "email", value: email, autocomplete: "username", maxlength: 255 }) %>
+                <%- include("partials/field", { name: "password", label: "Password", type: "password", value: "", autocomplete: "current-password" }) %>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Log in</button>
+                </div>
+            </form>
+
+            <p class="form-switch">New here? <a href="/sign-up">Create an account</a></p>
+        </div>
+<%- include("partials/footer") %>
