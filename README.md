@@ -20,6 +20,7 @@ A collection of projects built during [The Odin Project](https://www.theodinproj
 | [Mini Message Board](https://github.com/SwaibaSohail/Odin_Proj/tree/main/Mini%20Message%20Board) | Express + EJS message board with dark mode (runs locally with Node.js) |
 | [Inventory Application](https://github.com/SwaibaSohail/Odin_Proj/tree/main/Inventory%20Application) | Music store inventory with full CRUD, PostgreSQL and admin-protected edits (runs locally with Node.js) |
 | [Members Only](https://github.com/SwaibaSohail/Odin_Proj/tree/main/Members%20Only) | Clubhouse message board with Passport log-in, where only members see who wrote each post (runs locally with Node.js) |
+| [File Uploader](https://github.com/SwaibaSohail/Odin_Proj/tree/main/File%20Uploader) | Stripped-down Google Drive with folders, uploads and expiring share links (runs locally with Node.js) |
 
 
 ## Tech Stack
@@ -30,9 +31,10 @@ A collection of projects built during [The Odin Project](https://www.theodinproj
 - Webpack (Restaurant Page)
 - LocalStorage API
 - REST APIs
-- Node.js, Express and EJS (Mini Message Board, Inventory Application, Members Only)
-- PostgreSQL (Inventory Application, Members Only)
-- Passport and bcrypt authentication (Members Only)
+- Node.js, Express and EJS (Mini Message Board, Inventory Application, Members Only, File Uploader)
+- PostgreSQL (Inventory Application, Members Only, File Uploader)
+- Passport and bcrypt authentication (Members Only, File Uploader)
+- Prisma ORM, multer and Supabase Storage (File Uploader)
 
 
 ---
@@ -42,8 +44,8 @@ A collection of projects built during [The Odin Project](https://www.theodinproj
 ### Prerequisites
 - Any modern web browser
 - (Optional) Local server like VS Code Live Server
-- [Node.js](https://nodejs.org/) for the Mini Message Board, Inventory Application and Members Only
-- [PostgreSQL](https://www.postgresql.org/download/) for the Inventory Application and Members Only
+- [Node.js](https://nodejs.org/) for the Mini Message Board, Inventory Application, Members Only and File Uploader
+- [PostgreSQL](https://www.postgresql.org/download/) for the Inventory Application, Members Only and File Uploader
 
 ### Steps
 
@@ -65,3 +67,5 @@ A collection of projects built during [The Odin Project](https://www.theodinproj
 4. **Run the Inventory Application** (needs Node.js and PostgreSQL): follow the setup steps in [its README](Inventory%20Application/README.md).
 
 5. **Run Members Only** (needs Node.js and PostgreSQL): follow the setup steps in [its README](Members%20Only/README.md).
+
+6. **Run the File Uploader** (needs Node.js and PostgreSQL): follow the setup steps in [its README](File%20Uploader/README.md).
