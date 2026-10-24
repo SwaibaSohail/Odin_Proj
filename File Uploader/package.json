@@ -1,0 +1,32 @@
+{
+  "name": "file-uploader",
+  "version": "1.0.0",
+  "description": "A stripped-down Google Drive: folders, uploads, downloads and share links, built with Express, Prisma and Passport",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js",
+    "postinstall": "prisma generate",
+    "migrate": "prisma migrate dev",
+    "seed": "node prisma/seed.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/adapter-pg": "7.10.1",
+    "@prisma/client": "7.10.1",
+    "@quixo3/prisma-session-store": "^3.1.21",
+    "@supabase/supabase-js": "^2.118.0",
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^18.0.9",
+    "ejs": "^7.0.2",
+    "express": "^5.3.0",
+    "express-session": "^1.19.0",
+    "express-validator": "^7.3.2",
+    "multer": "^2.5.0",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.23.1",
+    "prisma": "7.10.1"
+  }
+}
