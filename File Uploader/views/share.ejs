@@ -1,0 +1,30 @@
+<%- include("partials/header") %>
+        <p class="share-banner">
+            Shared by <strong><%= link.folder.owner.name %></strong>.
+            This link works until <time class="local-time" datetime="<%= link.expiresAt.toISOString() %>"><%= formatDate(link.expiresAt) %></time>.
+        </p>
+
+        <nav class="breadcrumbs" aria-label="Folder path">
+            <% path.forEach((step, index) => { %>
+                <% if (index > 0) { %><span class="sep">/</span><% } %>
+                <% if (index === path.length - 1) { %>
+                    <span aria-current="page"><%= step.name %></span>
+                <% } else { %>
+                    <a href="<%= index === 0 ? `/share/${link.id}` : `/share/${link.id}/folders/${step.id}` %>"><%= step.name %></a>
+                <% } %>
+            <% }) %>
+        </nav>
+
+        <section class="page-head">
+            <h1><%= path[path.length - 1].name %></h1>
+        </section>
+
+        <%- include("partials/listing", {
+            folders,
+            files,
+            folderLink: (f) => `/share/${link.id}/folders/${f.id}`,
+            fileLink: (file) => `/share/${link.id}/files/${file.id}/download`,
+            emptyMessage: "This folder is empty.",
+        }) %>
+        <p class="hint">Click a file to download it.</p>
+<%- include("partials/footer") %>
