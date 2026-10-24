@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const { body, validationResult } = require("express-validator");
 const db = require("../db/queries");
-const { isUniqueViolation, safeRedirectPath } = require("../lib/helpers");
+const { isUniqueViolation, safeRedirectPath, flashAndRedirect } = require("../lib/helpers");
 
 const EMAIL_TAKEN = "An account with that email already exists.";
 
@@ -83,8 +83,8 @@ const signUpPost = [
     // Log the new user straight in. They still need the passcode to become a member.
     req.login(user, (err) => {
       if (err) return next(err);
-      req.session.flash = "Your account is ready. Enter the club passcode to become a member.";
-      res.redirect("/join");
+      const welcome = "Your account is ready. Enter the club passcode to become a member.";
+      flashAndRedirect(req, res, welcome, "/join").catch(next);
     });
   },
 ];

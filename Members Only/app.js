@@ -51,11 +51,19 @@ app.use(
 );
 app.use(passport.session());
 
-// Make the user and any one-time message available to every view.
+// Make the user available to every view, and show a one-time message on the
+// next page that's rendered. Error pages leave the message alone, so a
+// background request for a missing file (like /favicon.ico) can't use it up.
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
-  res.locals.flash = req.session.flash;
-  delete req.session.flash;
+  const render = res.render.bind(res);
+  res.render = (view, options, callback) => {
+    if (res.statusCode < 400 && req.session.flash) {
+      res.locals.flash = req.session.flash;
+      delete req.session.flash;
+    }
+    return render(view, options, callback);
+  };
   next();
 });
 

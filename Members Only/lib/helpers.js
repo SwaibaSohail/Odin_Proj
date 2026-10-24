@@ -32,7 +32,22 @@ function formatDate(date) {
   return `${dateFormat.format(date)} UTC`;
 }
 
+// Stores a one-time message and redirects once it's saved. Without the explicit
+// save, express-session sends the redirect first and saves afterwards, so the
+// browser can load the next page before the message has been stored.
+function flashAndRedirect(req, res, message, url) {
+  req.session.flash = message;
+  return new Promise((resolve, reject) => {
+    req.session.save((err) => {
+      if (err) return reject(err);
+      res.redirect(url);
+      resolve();
+    });
+  });
+}
+
 module.exports = {
+  flashAndRedirect,
   parseId,
   isUniqueViolation,
   matchesSecret,

@@ -1,6 +1,6 @@
 const { body, validationResult } = require("express-validator");
 const db = require("../db/queries");
-const { parseId } = require("../lib/helpers");
+const { parseId, flashAndRedirect } = require("../lib/helpers");
 
 const validateMessage = [
   body("title")
@@ -51,8 +51,7 @@ const newMessagePost = [
     }
 
     await db.insertMessage({ ...values, userId: req.user.id });
-    req.session.flash = "Message posted.";
-    res.redirect("/");
+    return flashAndRedirect(req, res, "Message posted.", "/");
   },
 ];
 
@@ -63,8 +62,7 @@ async function deleteMessagePost(req, res) {
     return res.status(404).render("404", { title: "Not found", message: "That message doesn't exist." });
   }
 
-  req.session.flash = "Message deleted.";
-  res.redirect("/");
+  return flashAndRedirect(req, res, "Message deleted.", "/");
 }
 
 module.exports = {

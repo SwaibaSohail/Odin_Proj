@@ -1,6 +1,6 @@
 const { body, validationResult } = require("express-validator");
 const db = require("../db/queries");
-const { matchesSecret } = require("../lib/helpers");
+const { matchesSecret, flashAndRedirect } = require("../lib/helpers");
 
 function checkPasscode(secretName) {
   return body("passcode")
@@ -28,8 +28,7 @@ const joinPost = [
     }
 
     await db.setMember(req.user.id);
-    req.session.flash = "You're in. You can now see who wrote each message.";
-    res.redirect("/");
+    return flashAndRedirect(req, res, "You're in. You can now see who wrote each message.", "/");
   },
 ];
 
@@ -48,8 +47,7 @@ const adminPost = [
     }
 
     await db.setAdmin(req.user.id);
-    req.session.flash = "You're now an admin. Every message has a delete button for you.";
-    res.redirect("/");
+    return flashAndRedirect(req, res, "You're now an admin. Every message has a delete button for you.", "/");
   },
 ];
 
