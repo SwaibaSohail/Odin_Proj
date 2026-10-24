@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  name         String   @db.VarChar(100)
+  email        String   @unique @db.VarChar(255) // always stored in lowercase
+  passwordHash String
+  createdAt    DateTime @default(now())
+  folders      Folder[]
+  files        File[]
+}
+
+// Folders can be nested. A folder with no parent sits at the top of "My Drive".
+// Deleting a folder deletes its subfolders, files and share links too.
+model Folder {
+  id         Int         @id @default(autoincrement())
+  name       String      @db.VarChar(100)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  ownerId    Int
+  owner      User        @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  parentId   Int?
+  parent     Folder?     @relation("Subfolders", fields: [parentId], references: [id], onDelete: Cascade)
+  subfolders Folder[]    @relation("Subfolders")
+  files      File[]
+  shareLinks ShareLink[]
+
+  @@index([ownerId, parentId])
+}
+
+// A file with no folder sits at the top of "My Drive".
+model File {
+  id         Int      @id @default(autoincrement())
+  name       String   @db.VarChar(255)
+  size       Int // bytes
+  mimeType   String   @db.VarChar(255)
+  storageKey String   @unique // where the file lives in storage
+  url        String // full storage URL
+  createdAt  DateTime @default(now())
+  ownerId    Int
+  owner      User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  folderId   Int?
+  folder     Folder?  @relation(fields: [folderId], references: [id], onDelete: Cascade)
+
+  @@index([ownerId, folderId])
+}
+
+// A public link to a folder and everything inside it, until it expires.
+model ShareLink {
+  id        String   @id @default(uuid()) @db.Uuid
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  folderId  Int
+  folder    Folder   @relation(fields: [folderId], references: [id], onDelete: Cascade)
+
+  @@index([folderId])
+}
+
+// Log-in sessions, managed by @quixo3/prisma-session-store.
+model Session {
+  id        String   @id
+  sid       String   @unique
+  data      String
+  expiresAt DateTime
+}
