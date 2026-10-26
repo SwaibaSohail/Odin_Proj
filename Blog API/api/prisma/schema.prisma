@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  AUTHOR // can write posts and manage comments
+  READER // a normal account, for future features
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  username     String   @unique @db.VarChar(50) // always stored in lowercase
+  name         String   @db.VarChar(100)
+  passwordHash String
+  role         Role     @default(READER)
+  createdAt    DateTime @default(now())
+  posts        Post[]
+}
+
+// A post stays a draft until it's published. Drafts are only visible to their author.
+model Post {
+  id          Int       @id @default(autoincrement())
+  title       String    @db.VarChar(200)
+  body        String
+  published   Boolean   @default(false)
+  publishedAt DateTime? // set the first time the post is published
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  authorId    Int
+  author      User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  comments    Comment[]
+
+  @@index([published, publishedAt])
+  @@index([authorId])
+}
+
+// Readers don't need an account to comment. They just leave a name.
+model Comment {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(50)
+  body      String   @db.VarChar(2000)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  postId    Int
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@index([postId, createdAt])
+}
