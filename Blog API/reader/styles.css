@@ -1,0 +1,349 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap");
+
+/* A quiet reading page: serif text on warm paper, one rust accent. */
+
+:root {
+    color-scheme: light;
+    --bg: #faf8f3;
+    --surface: #ffffff;
+    --text: #1f1d1a;
+    --muted: #6f6a62;
+    --rule: #e4dfd4;
+    --accent: #b4441e;
+    --accent-text: #ffffff;
+    --red: #b42318;
+    --green: #2b7a3e;
+    --field: #ffffff;
+    --focus: rgba(180, 68, 30, 0.25);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        color-scheme: dark;
+        --bg: #161514;
+        --surface: #1f1e1c;
+        --text: #e9e5dc;
+        --muted: #a39d92;
+        --rule: #34312d;
+        --accent: #e58a5f;
+        --accent-text: #161514;
+        --red: #ff8a80;
+        --green: #7fd18f;
+        --field: #1b1a18;
+        --focus: rgba(229, 138, 95, 0.3);
+    }
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #161514;
+    --surface: #1f1e1c;
+    --text: #e9e5dc;
+    --muted: #a39d92;
+    --rule: #34312d;
+    --accent: #e58a5f;
+    --accent-text: #161514;
+    --red: #ff8a80;
+    --green: #7fd18f;
+    --field: #1b1a18;
+    --focus: rgba(229, 138, 95, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.65;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: var(--accent);
+    text-underline-offset: 3px;
+}
+
+main,
+.site-header,
+.site-footer {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding-left: 22px;
+    padding-right: 22px;
+}
+
+main {
+    flex: 1;
+    padding-top: 36px;
+    padding-bottom: 60px;
+}
+
+/* Header and footer */
+
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 26px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--rule);
+}
+
+.blog-name {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    text-decoration: none;
+}
+
+.blog-name::before {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
+    background: var(--accent);
+    vertical-align: 0.15em;
+}
+
+.theme-toggle {
+    font: 500 0.72rem "IBM Plex Mono", monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: none;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    color: var(--muted);
+    padding: 4px 10px;
+    cursor: pointer;
+}
+
+.theme-toggle:hover {
+    color: var(--text);
+    border-color: var(--muted);
+}
+
+.site-footer {
+    padding-top: 18px;
+    padding-bottom: 28px;
+    border-top: 1px solid var(--rule);
+    font: 0.75rem "IBM Plex Mono", monospace;
+    color: var(--muted);
+}
+
+/* Shared bits */
+
+.meta,
+.back {
+    font: 0.78rem "IBM Plex Mono", monospace;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+}
+
+.back a {
+    color: var(--muted);
+}
+
+.status {
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    color: var(--muted);
+}
+
+.status.error,
+.form-message.error {
+    color: var(--red);
+}
+
+.empty {
+    color: var(--muted);
+    font-style: italic;
+}
+
+/* Home page */
+
+.intro {
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 30px;
+}
+
+.post-item {
+    padding: 26px 0;
+    border-top: 1px solid var(--rule);
+}
+
+.post-item h2 {
+    font-size: 1.55rem;
+    line-height: 1.25;
+    margin: 4px 0 8px;
+}
+
+.post-item h2 a {
+    color: var(--text);
+    text-decoration: none;
+}
+
+.post-item h2 a:hover {
+    color: var(--accent);
+}
+
+.excerpt {
+    margin-bottom: 10px;
+}
+
+/* Post page */
+
+.back {
+    margin-bottom: 26px;
+}
+
+.post h1 {
+    font-size: 2.3rem;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin: 6px 0 26px;
+}
+
+.post-body p {
+    font-size: 1.12rem;
+    line-height: 1.75;
+    margin-bottom: 1.2em;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+
+/* Comments */
+
+.comments {
+    margin-top: 46px;
+    padding-top: 26px;
+    border-top: 2px solid var(--text);
+}
+
+.comments h2 {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+}
+
+.comment-list {
+    list-style: none;
+}
+
+.comment {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+}
+
+.comment-meta {
+    font: 0.82rem "IBM Plex Sans", system-ui, sans-serif;
+    color: var(--muted);
+}
+
+.comment-meta strong {
+    color: var(--text);
+    font-weight: 600;
+}
+
+.comment-body {
+    margin-top: 4px;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: 0.95rem;
+}
+
+.comment-form h3 {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 1.15rem;
+    margin-bottom: 12px;
+}
+
+.comment-form label {
+    font-weight: 500;
+    font-size: 0.88rem;
+    margin-bottom: 4px;
+}
+
+.comment-form input,
+.comment-form textarea {
+    font: inherit;
+    padding: 8px 10px;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background: var(--field);
+    color: var(--text);
+}
+
+.comment-form textarea {
+    resize: vertical;
+}
+
+.comment-form input:focus,
+.comment-form textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--focus);
+}
+
+.comment-form [aria-invalid="true"] {
+    border-color: var(--red);
+}
+
+.field-error {
+    min-height: 1.3em;
+    margin-bottom: 8px;
+    font-size: 0.82rem;
+    color: var(--red);
+}
+
+.comment-form button {
+    align-self: flex-start;
+    font: 600 0.92rem "IBM Plex Sans", system-ui, sans-serif;
+    padding: 9px 18px;
+    border: none;
+    border-radius: 4px;
+    background: var(--accent);
+    color: var(--accent-text);
+    cursor: pointer;
+}
+
+.comment-form button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.form-message {
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+.form-message.success {
+    color: var(--green);
+}
+
+@media (max-width: 600px) {
+    body {
+        font-size: 17px;
+    }
+
+    .post h1 {
+        font-size: 1.8rem;
+    }
+}

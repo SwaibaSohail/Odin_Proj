@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notebook</title>
+    <script>
+        try {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+        } catch (e) {}
+    </script>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="js/theme.js"></script>
+    <script type="module" src="js/post.js"></script>
+</head>
+
+<body>
+    <header class="site-header">
+        <a href="index.html" class="blog-name">Notebook</a>
+        <button type="button" class="theme-toggle" aria-label="Toggle dark mode">Dark</button>
+    </header>
+
+    <main>
+        <p class="back"><a href="index.html">← All posts</a></p>
+        <p id="status" class="status" role="status">Loading the post…</p>
+        <article id="post" class="post"></article>
+
+        <section id="comments" class="comments" hidden>
+            <h2 id="comments-heading">Comments</h2>
+            <ol id="comment-list" class="comment-list"></ol>
+
+            <form id="comment-form" class="comment-form" novalidate>
+                <h3>Leave a comment</h3>
+                <label for="name">Your name</label>
+                <input type="text" id="name" name="name" maxlength="50" autocomplete="name" required>
+                <p class="field-error" data-error-for="name"></p>
+
+                <label for="body">Comment</label>
+                <textarea id="body" name="body" rows="4" maxlength="2000" required></textarea>
+                <p class="field-error" data-error-for="body"></p>
+
+                <button type="submit">Post comment</button>
+                <p id="form-message" class="form-message" role="status"></p>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">Notebook · Blog API project for The Odin Project</footer>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notebook</title>
+    <meta name="description" content="Short posts about learning to build things for the web.">
+    <script>
+        try {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+        } catch (e) {}
+    </script>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="js/theme.js"></script>
+    <script type="module" src="js/home.js"></script>
+</head>
+
+<body>
+    <header class="site-header">
+        <a href="index.html" class="blog-name">Notebook</a>
+        <button type="button" class="theme-toggle" aria-label="Toggle dark mode">Dark</button>
+    </header>
+
+    <main>
+        <section class="intro">
+            <p>Short posts about learning to build things for the web.</p>
+        </section>
+        <p id="status" class="status" role="status">Loading posts…</p>
+        <div id="posts" class="post-list"></div>
+    </main>
+
+    <footer class="site-footer">Notebook · Blog API project for The Odin Project</footer>
+</body>
+
+</html>
