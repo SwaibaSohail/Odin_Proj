@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts · Notebook Editor</title>
+    <script>
+        try {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+        } catch (e) {}
+    </script>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="js/theme.js"></script>
+    <script type="module" src="js/dashboard.js"></script>
+</head>
+
+<body>
+    <header class="site-header">
+        <a href="index.html" class="logo">Notebook <span class="logo-tag">Editor</span></a>
+        <nav class="site-nav">
+            <a href="index.html">Posts</a>
+            <span id="user-name" class="user-name"></span>
+            <button type="button" id="log-out" class="link-button">Log out</button>
+            <button type="button" class="theme-toggle" aria-label="Toggle dark mode">Dark</button>
+        </nav>
+    </header>
+
+    <main>
+        <p id="message" class="message" hidden></p>
+
+        <section class="page-head">
+            <h1>Posts</h1>
+            <a href="editor.html" class="btn btn-primary">New post</a>
+        </section>
+
+        <div class="filters" role="group" aria-label="Show posts">
+            <button type="button" data-filter="all" aria-pressed="true">All <span class="count"></span></button>
+            <button type="button" data-filter="published" aria-pressed="false">Published <span class="count"></span></button>
+            <button type="button" data-filter="draft" aria-pressed="false">Drafts <span class="count"></span></button>
+        </div>
+
+        <p id="status" class="status" role="status">Loading posts…</p>
+        <div class="table-wrap">
+            <table id="post-table" class="post-table" hidden>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th class="num">Comments</th>
+                        <th>Last saved</th>
+                        <th><span class="visually-hidden">Actions</span></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </main>
+</body>
+
+</html>

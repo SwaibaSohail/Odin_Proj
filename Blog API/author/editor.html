@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post · Notebook Editor</title>
+    <script>
+        try {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+        } catch (e) {}
+    </script>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="js/theme.js"></script>
+    <script type="module" src="js/editor.js"></script>
+</head>
+
+<body>
+    <header class="site-header">
+        <a href="index.html" class="logo">Notebook <span class="logo-tag">Editor</span></a>
+        <nav class="site-nav">
+            <a href="index.html">Posts</a>
+            <span id="user-name" class="user-name"></span>
+            <button type="button" id="log-out" class="link-button">Log out</button>
+            <button type="button" class="theme-toggle" aria-label="Toggle dark mode">Dark</button>
+        </nav>
+    </header>
+
+    <main>
+        <nav class="breadcrumbs" aria-label="You are here">
+            <a href="index.html">Posts</a> <span class="sep">/</span> <span id="crumb" aria-current="page"></span>
+        </nav>
+        <p id="message" class="message" hidden></p>
+
+        <section class="page-head">
+            <h1 id="heading">Post</h1>
+            <a id="view-on-blog" class="btn btn-small" target="_blank" rel="noopener" hidden>View on blog ↗</a>
+        </section>
+        <p id="post-status" class="post-status"></p>
+
+        <form id="post-form" class="card form editor-form" novalidate>
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" maxlength="200" required>
+            <p class="field-error" data-error-for="title"></p>
+
+            <label for="body">Post</label>
+            <textarea id="body" name="body" rows="18" required></textarea>
+            <p class="hint">Leave a blank line between paragraphs.</p>
+            <p class="field-error" data-error-for="body"></p>
+
+            <div class="form-actions">
+                <button type="submit" id="save" class="btn btn-primary">Save draft</button>
+                <button type="button" id="publish" class="btn">Save and publish</button>
+                <button type="button" id="delete" class="btn btn-danger push-right" hidden>Delete post</button>
+            </div>
+        </form>
+
+        <section id="comments" class="card comments" hidden>
+            <h2 id="comments-heading">Comments</h2>
+            <ol id="comment-list" class="comment-list"></ol>
+        </section>
+    </main>
+</body>
+
+</html>

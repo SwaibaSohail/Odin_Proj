@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in · Notebook Editor</title>
+    <script>
+        try {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+        } catch (e) {}
+    </script>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="js/theme.js"></script>
+    <script type="module" src="js/login.js"></script>
+</head>
+
+<body>
+    <header class="site-header">
+        <span class="logo">Notebook <span class="logo-tag">Editor</span></span>
+        <nav class="site-nav">
+            <button type="button" class="theme-toggle" aria-label="Toggle dark mode">Dark</button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="card card-narrow">
+            <h1>Log in</h1>
+            <p class="muted">For writing and managing posts on the blog.</p>
+            <p id="message" class="message" hidden></p>
+
+            <form id="login-form" class="form" novalidate>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" autocomplete="username" required>
+                <p class="field-error" data-error-for="username"></p>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" autocomplete="current-password" required>
+                <p class="field-error" data-error-for="password"></p>
+
+                <button type="submit" class="btn btn-primary">Log in</button>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>
