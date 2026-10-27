@@ -21,7 +21,7 @@ A collection of projects built during [The Odin Project](https://www.theodinproj
 | [Inventory Application](https://github.com/SwaibaSohail/Odin_Proj/tree/main/Inventory%20Application) | Music store inventory with full CRUD, PostgreSQL and admin-protected edits (runs locally with Node.js) |
 | [Members Only](https://github.com/SwaibaSohail/Odin_Proj/tree/main/Members%20Only) | Clubhouse message board with Passport log-in, where only members see who wrote each post (runs locally with Node.js) |
 | [File Uploader](https://github.com/SwaibaSohail/Odin_Proj/tree/main/File%20Uploader) | Stripped-down Google Drive with folders, uploads and expiring share links (runs locally with Node.js) |
-| [Blog API](https://github.com/SwaibaSohail/Odin_Proj/tree/main/Blog%20API) | REST API with JWT log-in, plus separate reader and author websites (runs locally with Node.js) |
+| [Blog API](https://swaibasohail.github.io/Odin_Proj/Blog%20API/reader/) | REST API with JWT log-in, plus separate reader and author websites (API hosted on Render) |
 
 
 ## Tech Stack
