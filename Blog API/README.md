@@ -10,6 +10,8 @@ A blog split into three apps that talk to each other over HTTP, built for The Od
 
 Both websites are plain HTML, CSS and JavaScript that use `fetch` to call the API. They have dark mode and work on phones.
 
+**Live demo:** the [reader site](https://swaibasohail.github.io/Odin_Proj/Blog%20API/reader/) and the [author site](https://swaibasohail.github.io/Odin_Proj/Blog%20API/author/). The API runs on Render's free plan, which sleeps when nobody uses it, so the first visit can take up to a minute to load.
+
 ## Database design
 
 ```
@@ -126,11 +128,11 @@ The websites only need a static file server. The `serve.json` in each folder sto
 
 To add the author account and posts to the live database, temporarily set `DATABASE_URL` in `api/.env` to the hosted database, add a private `SEED_PASSWORD`, and run `npm run seed` once.
 
-**Websites:** they're static files, so any static host works. This repo already uses GitHub Pages, so after pushing they're also at:
+**Websites:** they're static files, so any static host works. This repo uses GitHub Pages, so they're at:
 - `https://swaibasohail.github.io/Odin_Proj/Blog%20API/reader/`
 - `https://swaibasohail.github.io/Odin_Proj/Blog%20API/author/`
 
-Before deploying, change `API_URL` in `reader/js/config.js` and `author/js/config.js` to your deployed API's address, and `READER_URL` in `author/js/config.js` to the reader site's address. If you'd rather keep the two sites fully separate, deploy each folder to its own site on [Netlify](https://www.netlify.com/) or [Cloudflare Pages](https://pages.cloudflare.com/), and add both addresses to `CORS_ORIGINS`.
+Each site's `js/config.js` picks which API to call. On `localhost` it uses `http://localhost:3000/api`, and anywhere else it uses the deployed API at `https://notebook-blog-api.onrender.com/api`. If you deploy your own copy, change those addresses to yours, along with `READER_URL` in `author/js/config.js`. If you'd rather keep the two sites fully separate, deploy each folder to its own site on [Netlify](https://www.netlify.com/) or [Cloudflare Pages](https://pages.cloudflare.com/), and add both addresses to `CORS_ORIGINS`.
 
 ## Notes
 
