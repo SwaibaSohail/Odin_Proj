@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Not found · Where's Mabel?</title>
+    <meta name="description" content="A Where's Waldo style game. Find Mabel and her friends in three crowded pictures, against the clock.">
+    <script>
+        try {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+        } catch (e) {}
+    </script>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="/styles.css">
+    <script type="module" src="/js/theme.js"></script>
+</head>
+
+<body>
+    <header class="site-header">
+        <a href="/" class="logo"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 5v19q0 4-3.5 4Q10 28 10 25.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M3 16A13 11.5 0 0 1 29 16q-3.25-2.6-6.5 0-3.25-2.6-6.5 0-3.25-2.6-6.5 0Q6.25 13.4 3 16Z" fill="#d62828" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Where's Mabel?</a>
+        <nav class="site-nav" aria-label="Main">
+            <a href="/">Pictures</a>
+            <a href="/scores">High scores</a>
+            <button type="button" class="theme-toggle" aria-label="Toggle dark mode">Dark</button>
+        </nav>
+    </header>
+
+    <main class="not-found">
+        <h1>Lost in the crowd</h1>
+        <p class="muted">There's nothing at this address.</p>
+        <a class="btn btn-primary" href="/">Back to the pictures</a>
+    </main>
+
+    <footer class="site-footer">Where's Mabel? is a photo tagging project for The Odin Project. The pictures were made for this game.</footer>
+</body>
+
+</html>
