@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// A picture to search, like the beach.
+model Scene {
+  id          Int    @id @default(autoincrement())
+  slug        String @unique
+  title       String
+  description String
+  imageUrl    String
+  previewUrl  String
+  width       Int // size of the full image in pixels
+  height      Int
+  position    Int    @default(0) // order on the home page
+  spots       Spot[]
+  games       Game[]
+}
+
+// Someone to find. The same characters hide in every scene.
+model Character {
+  id          Int    @id @default(autoincrement())
+  slug        String @unique
+  name        String
+  description String
+  imageUrl    String
+  position    Int    @default(0)
+  spots       Spot[]
+  finds       Find[]
+}
+
+// Where a character is hiding in a scene. The box is stored as fractions of the
+// image's width and height (0 to 1), so a click lines up at any screen size.
+model Spot {
+  sceneId     Int
+  characterId Int
+  x           Float
+  y           Float
+  width       Float
+  height      Float
+  scene       Scene     @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+  character   Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+
+  @@id([sceneId, characterId])
+}
+
+// One round of the game. Players don't have accounts, so the random id is their
+// ticket for this round. All the timing happens on the server.
+model Game {
+  id          String    @id @default(uuid())
+  sceneId     Int
+  startedAt   DateTime
+  finishedAt  DateTime?
+  timeMs      Int? // finishedAt - startedAt
+  misses      Int       @default(0)
+  lastGuessAt DateTime?
+  playerName  String?   @db.VarChar(20) // set when a top-10 time goes on the board
+  scene       Scene     @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+  finds       Find[]
+
+  @@index([sceneId, timeMs])
+  @@index([startedAt])
+}
+
+// A character found during a game.
+model Find {
+  gameId      String
+  characterId Int
+  foundAt     DateTime  @default(now())
+  game        Game      @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  character   Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+
+  @@id([gameId, characterId])
+}
