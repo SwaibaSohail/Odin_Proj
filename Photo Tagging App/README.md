@@ -87,17 +87,6 @@ Open [http://localhost:3000](http://localhost:3000).
 
 `npm run seed` copies the pictures and hiding spots from `prisma/data.js` into the database. It's safe to run again: it updates them and keeps the high scores.
 
-## Deploy
-
-It's one Express app that serves both the website and the API, so it only needs one Node host and a PostgreSQL database. For example, use [Render](https://render.com/) with a free [Neon](https://neon.tech/) database:
-
-- Create a new database in Neon for this app, rather than sharing one with another project. Each app keeps its own list of migrations.
-- On Render, create a **Web Service** from this repo:
-  - Root directory: `Photo Tagging App`
-  - Build command: `npm install && npx prisma migrate deploy && npm run seed`
-  - Start command: `npm start`
-  - Environment variables: `DATABASE_URL` (the Neon connection string) and `NODE_VERSION` = `22`
-
 Render's free plan sleeps when nobody uses it, so the first visit can take up to a minute to load.
 
 ## Adding a picture
@@ -106,8 +95,3 @@ Render's free plan sleeps when nobody uses it, so the first visit can take up to
 2. Add it to `prisma/data.js` with its size and each character's box in pixels: `[left, top, width, height]`.
 3. Run `npm run seed`.
 
-## Notes
-
-- The three pictures and the four characters were made for this project. They were drawn as vector art with code, then saved as WebP images.
-- Player names are always added to the page as text, never as HTML.
-- The app uses **Prisma 7** with `prisma.config.js` and the `@prisma/adapter-pg` driver adapter. The Prisma packages are pinned to `7.10.1`, because npm's `latest` tag for the Prisma CLI currently points to an 8.0 release candidate.
