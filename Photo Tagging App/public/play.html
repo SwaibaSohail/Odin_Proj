@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Where's Mabel?</title>
+    <meta name="description" content="A Where's Waldo style game. Find Mabel and her friends in three crowded pictures, against the clock.">
+    <script>
+        try {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+        } catch (e) {}
+    </script>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="/styles.css">
+    <script type="module" src="/js/theme.js"></script>
+    <script type="module" src="/js/play.js"></script>
+</head>
+
+<body class="play-page">
+    <header class="site-header">
+        <a href="/" class="logo"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 5v19q0 4-3.5 4Q10 28 10 25.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M3 16A13 11.5 0 0 1 29 16q-3.25-2.6-6.5 0-3.25-2.6-6.5 0-3.25-2.6-6.5 0Q6.25 13.4 3 16Z" fill="#d62828" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Where's Mabel?</a>
+        <nav class="site-nav" aria-label="Main">
+            <a href="/">Pictures</a>
+            <a href="/scores">High scores</a>
+            <button type="button" class="theme-toggle" aria-label="Toggle dark mode">Dark</button>
+        </nav>
+    </header>
+
+    <div class="game-bar">
+        <div class="game-title">
+            <p class="label">Find everyone in</p>
+            <h1 id="scene-title">...</h1>
+        </div>
+        <ul class="targets" id="targets" aria-label="Who to find"></ul>
+        <div class="game-tools">
+            <button type="button" class="btn btn-small" id="show-results" hidden>Results</button>
+            <p class="timer" id="timer" title="Time">0:00</p>
+            <div class="zoom" role="group" aria-label="Zoom">
+                <button type="button" id="zoom-out" aria-label="Zoom out" title="Zoom out (-)">&minus;</button>
+                <output id="zoom-level">100%</output>
+                <button type="button" id="zoom-in" aria-label="Zoom in" title="Zoom in (+)">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="viewer">
+        <div class="viewport" id="viewport">
+            <div class="stage" id="stage">
+                <img id="picture" alt="" draggable="false">
+                <div class="target-box" id="target-box" hidden></div>
+                <div class="target-menu" id="target-menu" hidden>
+                    <p class="menu-title">Who's here?</p>
+                    <ul id="menu-list"></ul>
+                </div>
+            </div>
+        </div>
+        <div class="loading" id="loading">
+            <p>Loading the picture...</p>
+        </div>
+        <p class="toast" id="toast" role="status" aria-live="polite"></p>
+    </div>
+
+    <dialog class="dialog" id="result" aria-labelledby="result-title">
+        <h2 id="result-title">You found everyone!</h2>
+        <p class="muted" id="result-scene"></p>
+        <p class="result-time" id="result-time"></p>
+        <p class="muted" id="result-misses"></p>
+        <p class="result-note" id="result-note"></p>
+
+        <form class="name-form" id="name-form" novalidate hidden>
+            <label for="player-name">Your name for the high scores</label>
+            <div class="name-row">
+                <input id="player-name" name="name" maxlength="20" autocomplete="nickname" required>
+                <button class="btn btn-primary" type="submit">Save</button>
+            </div>
+            <p class="field-error" id="name-error" aria-live="polite"></p>
+        </form>
+
+        <div class="card score-card" id="board" hidden>
+            <table class="score-table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Time</th>
+                    </tr>
+                </thead>
+                <tbody id="board-rows"></tbody>
+            </table>
+        </div>
+
+        <div class="dialog-actions">
+            <button type="button" class="btn btn-primary" id="play-again">Play again</button>
+            <a class="btn" href="/">Pick another picture</a>
+        </div>
+    </dialog>
+</body>
+
+</html>
