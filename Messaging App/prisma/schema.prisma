@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           Int       @id @default(autoincrement())
+  username     String    @unique @db.VarChar(20) // always stored in lowercase
+  displayName  String    @db.VarChar(40)
+  about        String    @default("") @db.VarChar(160)
+  passwordHash String
+  lastSeenAt   DateTime? // updated while the app is open, to show who's online
+  createdAt    DateTime  @default(now())
+  avatar       Image?    @relation("Avatar")
+  memberships  Member[]
+  messages     Message[]
+}
+
+// A chat between two people, or a group.
+model Conversation {
+  id            Int       @id @default(autoincrement())
+  isGroup       Boolean   @default(false)
+  name          String?   @db.VarChar(50) // groups only
+  directKey     String?   @unique // "3:7" for the chat between users 3 and 7, so two people only ever get one
+  createdAt     DateTime  @default(now())
+  lastMessageAt DateTime  @default(now()) // newest chats go to the top of the list
+  members       Member[]
+  messages      Message[]
+}
+
+// Someone taking part in a conversation.
+model Member {
+  conversationId    Int
+  userId            Int
+  joinedAt          DateTime     @default(now())
+  lastReadMessageId Int          @default(0) // messages after this one are unread
+  conversation      Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  user              User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([conversationId, userId])
+  @@index([userId])
+}
+
+enum MessageKind {
+  TEXT // a normal message: text, a picture, or both
+  EVENT // a note in the middle of a group chat, like "created the group"
+}
+
+model Message {
+  id             Int          @id @default(autoincrement())
+  conversationId Int
+  senderId       Int
+  kind           MessageKind  @default(TEXT)
+  body           String       @db.VarChar(2000)
+  createdAt      DateTime     @default(now())
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender         User         @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  image          Image?       @relation("MessageImage")
+
+  @@index([conversationId, id])
+}
+
+// Pictures are kept in the database, so the app needs no separate file storage.
+// Each one is either attached to a message or is someone's profile photo.
+model Image {
+  id        String   @id @default(uuid())
+  data      Bytes
+  mimeType  String
+  width     Int
+  height    Int
+  messageId Int?     @unique
+  userId    Int?     @unique // set when this is a profile photo
+  createdAt DateTime @default(now())
+  message   Message? @relation("MessageImage", fields: [messageId], references: [id], onDelete: Cascade)
+  user      User?    @relation("Avatar", fields: [userId], references: [id], onDelete: Cascade)
+}
