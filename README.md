@@ -23,6 +23,7 @@ A collection of projects built during [The Odin Project](https://www.theodinproj
 | [File Uploader](https://github.com/SwaibaSohail/Odin_Proj/tree/main/File%20Uploader) | Stripped-down Google Drive with folders, uploads and expiring share links (runs locally with Node.js) |
 | [Blog API](https://swaibasohail.github.io/Odin_Proj/Blog%20API/reader/) | REST API with JWT log-in, plus separate reader and author websites (API hosted on Render) |
 | [Where's Waldo (Photo Tagging App)](https://github.com/SwaibaSohail/Odin_Proj/tree/main/Photo%20Tagging%20App) | Find four hidden characters in crowded pictures, timed by the server, with high scores (runs locally with Node.js) |
+| [Messaging App](https://github.com/SwaibaSohail/Odin_Proj/tree/main/Messaging%20App) | Direct messages, group chats, pictures and profiles, with online status and unread counts (runs locally with Node.js) |
 
 
 ## Tech Stack
@@ -33,11 +34,11 @@ A collection of projects built during [The Odin Project](https://www.theodinproj
 - Webpack (Restaurant Page)
 - LocalStorage API
 - REST APIs
-- Node.js and Express (Mini Message Board, Inventory Application, Members Only, File Uploader, Blog API, Photo Tagging App), with EJS for the first four
-- PostgreSQL (Inventory Application, Members Only, File Uploader, Blog API, Photo Tagging App)
+- Node.js and Express (Mini Message Board, Inventory Application, Members Only, File Uploader, Blog API, Photo Tagging App, Messaging App), with EJS for the first four
+- PostgreSQL (Inventory Application, Members Only, File Uploader, Blog API, Photo Tagging App, Messaging App)
 - Passport and bcrypt authentication (Members Only, File Uploader)
-- Prisma ORM (File Uploader, Blog API, Photo Tagging App), multer and Supabase Storage (File Uploader)
-- REST APIs with JSON Web Tokens (Blog API)
+- Prisma ORM (File Uploader, Blog API, Photo Tagging App, Messaging App), multer (File Uploader, Messaging App) and Supabase Storage (File Uploader)
+- REST APIs with JSON Web Tokens (Blog API, Messaging App)
 
 
 ---
@@ -47,8 +48,8 @@ A collection of projects built during [The Odin Project](https://www.theodinproj
 ### Prerequisites
 - Any modern web browser
 - (Optional) Local server like VS Code Live Server
-- [Node.js](https://nodejs.org/) for the Mini Message Board, Inventory Application, Members Only, File Uploader, Blog API and Photo Tagging App
-- [PostgreSQL](https://www.postgresql.org/download/) for the Inventory Application, Members Only, File Uploader, Blog API and Photo Tagging App
+- [Node.js](https://nodejs.org/) for the Mini Message Board, Inventory Application, Members Only, File Uploader, Blog API, Photo Tagging App and Messaging App
+- [PostgreSQL](https://www.postgresql.org/download/) for the Inventory Application, Members Only, File Uploader, Blog API, Photo Tagging App and Messaging App
 
 ### Steps
 
@@ -76,3 +77,5 @@ A collection of projects built during [The Odin Project](https://www.theodinproj
 7. **Run the Blog API** (needs Node.js and PostgreSQL): it's three apps, so follow the steps in [its README](Blog%20API/README.md).
 
 8. **Run the Photo Tagging App** (needs Node.js and PostgreSQL): follow the setup steps in [its README](Photo%20Tagging%20App/README.md).
+
+9. **Run the Messaging App** (needs Node.js and PostgreSQL): follow the setup steps in [its README](Messaging%20App/README.md).
