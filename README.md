@@ -23,7 +23,7 @@ A collection of projects built during [The Odin Project](https://www.theodinproj
 | [File Uploader](https://github.com/SwaibaSohail/Odin_Proj/tree/main/File%20Uploader) | Stripped-down Google Drive with folders, uploads and expiring share links (runs locally with Node.js) |
 | [Blog API](https://swaibasohail.github.io/Odin_Proj/Blog%20API/reader/) | REST API with JWT log-in, plus separate reader and author websites (API hosted on Render) |
 | [Where's Waldo (Photo Tagging App)](https://github.com/SwaibaSohail/Odin_Proj/tree/main/Photo%20Tagging%20App) | Find four hidden characters in crowded pictures, timed by the server, with high scores (runs locally with Node.js) |
-| [Messaging App](https://github.com/SwaibaSohail/Odin_Proj/tree/main/Messaging%20App) | Direct messages, group chats, pictures and profiles, with online status and unread counts (runs locally with Node.js) |
+| [Messaging App](https://parley-chat.onrender.com) | Direct messages, group chats, pictures and profiles, with online status and unread counts (hosted on Render) |
 
 
 ## Tech Stack
