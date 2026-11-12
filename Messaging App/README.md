@@ -6,6 +6,8 @@ A messaging app built for The Odin Project NodeJS course. Sign up, find people, 
 
 Built with Express, PostgreSQL and Prisma. The app itself is plain HTML, CSS and JavaScript, served by the same Express app.
 
+**Live demo:** [parley-chat.onrender.com](https://parley-chat.onrender.com). It runs on Render's free plan, which sleeps when nobody uses it, so the first visit can take up to a minute to load.
+
 ## What it does
 
 - **Accounts:** sign up and log in with a username and password.
