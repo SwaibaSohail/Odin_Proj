@@ -1,0 +1,12 @@
+<% if (person.id !== me.id) { %>
+<form method="post" action="/users/<%= person.username %>/<%= person.follow ? "unfollow" : "follow" %>" class="follow-form"<% if (person.follow === "following") { %> data-confirm="Stop following <%= person.displayName %>?"<% } %>>
+    <input type="hidden" name="next" value="<%= here %>">
+    <% if (person.follow === "following") { %>
+    <button type="submit" class="btn btn-small" title="Stop following">Following</button>
+    <% } else if (person.follow === "requested") { %>
+    <button type="submit" class="btn btn-small" title="Cancel your request">Requested</button>
+    <% } else { %>
+    <button type="submit" class="btn btn-small btn-primary"><%= person.followsYou ? "Follow back" : "Follow" %></button>
+    <% } %>
+</form>
+<% } %>

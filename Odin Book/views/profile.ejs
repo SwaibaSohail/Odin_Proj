@@ -1,0 +1,40 @@
+<%- include("partials/head") %>
+    <div class="layout single">
+        <main class="column">
+            <section class="profile card">
+                <div class="profile-top">
+                    <%- include("partials/avatar", { user: person, size: 96 }) %>
+                    <div class="profile-actions">
+                        <% if (person.id === me.id) { %>
+                        <a class="btn btn-small" href="/settings">Edit profile</a>
+                        <% } else { %>
+                        <%- include("partials/follow-button", { person }) %>
+                        <% } %>
+                    </div>
+                </div>
+                <h1><%= person.displayName %></h1>
+                <p class="profile-handle">@<%= person.username %><% if (person.followsYou) { %> <span class="tag">Follows you</span><% } %><% if (person.isGuest) { %> <span class="tag">Guest</span><% } %></p>
+                <% if (person.bio) { %><p class="profile-bio"><%- h.linkify(person.bio) %></p><% } %>
+                <p class="profile-joined">Joined <%= h.joined(person.createdAt) %><% if (person.requiresApproval) { %> · Approves followers<% } %></p>
+                <nav class="profile-counts" aria-label="Profile sections">
+                    <a href="/users/<%= person.username %>" <%- view === "posts" ? 'aria-current="page"' : "" %>><strong><%= counts.posts %></strong> <%= counts.posts === 1 ? "post" : "posts" %></a>
+                    <a href="/users/<%= person.username %>/followers" <%- view === "followers" ? 'aria-current="page"' : "" %>><strong><%= counts.followers %></strong> <%= counts.followers === 1 ? "follower" : "followers" %></a>
+                    <a href="/users/<%= person.username %>/following" <%- view === "following" ? 'aria-current="page"' : "" %>><strong><%= counts.following %></strong> following</a>
+                </nav>
+            </section>
+
+            <% if (view === "posts") { %>
+                <% if (!posts.length) { %>
+                <div class="empty card"><h2>No posts yet</h2><p><%= person.id === me.id ? "Your posts will show up here." : `${person.displayName} hasn't posted anything.` %></p></div>
+                <% } %>
+                <%- include("partials/post-list", { posts, older }) %>
+            <% } else if (people.length) { %>
+            <ul class="user-list card">
+                <% for (const other of people) { %><%- include("partials/user-row", { person: other, compact: false }) %><% } %>
+            </ul>
+            <% } else { %>
+            <div class="empty card"><h2><%= view === "followers" ? "No followers yet" : "Not following anyone yet" %></h2></div>
+            <% } %>
+        </main>
+    </div>
+<%- include("partials/foot") %>

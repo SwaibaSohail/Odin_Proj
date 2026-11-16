@@ -1,0 +1,27 @@
+<%- include("partials/head") %>
+    <div class="layout single">
+        <main class="column">
+            <h1 class="page-title">People</h1>
+            <form method="get" action="/users" class="search-form" role="search">
+                <input type="search" name="q" value="<%= q %>" maxlength="40" placeholder="Search by name or username" aria-label="Search people">
+                <button type="submit" class="btn">Search</button>
+            </form>
+
+            <% if (people.length) { %>
+            <ul class="user-list card">
+                <% for (const person of people) { %><%- include("partials/user-row", { person, compact: false }) %><% } %>
+            </ul>
+            <% } else { %>
+            <div class="empty card">
+                <% if (q) { %>
+                <h2>Nobody matches "<%= q %>"</h2>
+                <p><a href="/users">See everyone</a></p>
+                <% } else { %>
+                <h2>Nobody else is here yet</h2>
+                <p>When more people sign up, they'll show up here.</p>
+                <% } %>
+            </div>
+            <% } %>
+        </main>
+    </div>
+<%- include("partials/foot") %>

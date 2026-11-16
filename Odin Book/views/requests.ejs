@@ -1,0 +1,35 @@
+<%- include("partials/head") %>
+    <div class="layout single">
+        <main class="column">
+            <h1 class="page-title">Follow requests</h1>
+
+            <h2 class="section-title">Waiting for your answer</h2>
+            <% if (incoming.length) { %>
+            <ul class="user-list card">
+                <% for (const person of incoming) { %>
+                <li class="user-row">
+                    <a class="user-face" href="/users/<%= person.username %>" tabindex="-1" aria-hidden="true"><%- include("partials/avatar", { user: person, size: 44 }) %></a>
+                    <div class="user-text">
+                        <p class="user-name"><a href="/users/<%= person.username %>"><%= person.displayName %></a></p>
+                        <p class="user-handle">@<%= person.username %> wants to follow you</p>
+                    </div>
+                    <div class="request-buttons">
+                        <form method="post" action="/requests/<%= person.username %>/accept"><button type="submit" class="btn btn-small btn-primary">Accept</button></form>
+                        <form method="post" action="/requests/<%= person.username %>/decline"><button type="submit" class="btn btn-small">Decline</button></form>
+                    </div>
+                </li>
+                <% } %>
+            </ul>
+            <% } else { %>
+            <div class="empty card"><p>Nobody is waiting. When someone asks to follow you, you'll see them here.</p></div>
+            <% } %>
+
+            <% if (sent.length) { %>
+            <h2 class="section-title">Requests you've sent</h2>
+            <ul class="user-list card">
+                <% for (const person of sent) { %><%- include("partials/user-row", { person, compact: false }) %><% } %>
+            </ul>
+            <% } %>
+        </main>
+    </div>
+<%- include("partials/foot") %>

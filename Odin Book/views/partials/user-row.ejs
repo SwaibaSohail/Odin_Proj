@@ -1,0 +1,9 @@
+<li class="user-row">
+    <a class="user-face" href="/users/<%= person.username %>" tabindex="-1" aria-hidden="true"><%- include("avatar", { user: person, size: compact ? 34 : 44 }) %></a>
+    <div class="user-text">
+        <p class="user-name"><a href="/users/<%= person.username %>"><%= person.displayName %></a><% if (person.followsYou) { %> <span class="tag">Follows you</span><% } %></p>
+        <p class="user-handle">@<%= person.username %></p>
+        <% if (!compact && person.bio) { %><p class="user-bio"><%= person.bio %></p><% } %>
+    </div>
+    <%- include("follow-button", { person }) %>
+</li>
