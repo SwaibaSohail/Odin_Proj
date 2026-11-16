@@ -1,0 +1,6 @@
+<% for (const post of posts) { %>
+<%- include("post-card", { post, full: false }) %>
+<% } %>
+<% if (older) { %>
+<p class="older"><a class="btn" href="?before=<%= older %>">Older posts</a></p>
+<% } %>

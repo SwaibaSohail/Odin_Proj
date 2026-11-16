@@ -1,0 +1,60 @@
+<%- include("partials/head") %>
+    <div class="layout">
+        <main class="column">
+            <h1 class="visually-hidden"><%= title %></h1>
+
+            <form method="post" action="/posts" enctype="multipart/form-data" class="composer card" data-composer>
+                <input type="hidden" name="next" value="<%= tab === "home" ? "/" : "/explore" %>">
+                <div class="composer-top">
+                    <%- include("partials/avatar", { user: me, size: 44 }) %>
+                    <textarea name="body" rows="2" maxlength="1000" placeholder="What's on your mind, <%= me.displayName.split(" ")[0] %>?" aria-label="Write a post"></textarea>
+                </div>
+                <div class="composer-preview" data-preview hidden>
+                    <img alt="The picture you chose">
+                    <button type="button" class="btn btn-small" data-remove-picture>Remove picture</button>
+                </div>
+                <p class="form-message error" data-composer-error role="alert" hidden></p>
+                <div class="composer-bottom">
+                    <label class="btn btn-small file-button">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="8.5" cy="9.5" r="1.7"/><path d="m4 17 5-5 4 4 3-3 4 4"/></svg>
+                        Add a picture
+                        <input type="file" name="image" accept="image/png,image/jpeg,image/gif,image/webp" class="visually-hidden">
+                    </label>
+                    <span class="counter" data-counter aria-hidden="true">0 / 1,000</span>
+                    <button type="submit" class="btn btn-primary">Post</button>
+                </div>
+            </form>
+
+            <div class="tabs">
+                <a href="/" <%- tab === "home" ? 'aria-current="page"' : "" %>>Following</a>
+                <a href="/explore" <%- tab === "explore" ? 'aria-current="page"' : "" %>>Everyone</a>
+            </div>
+
+            <% if (!posts.length) { %>
+            <div class="empty card">
+                <% if (tab === "home") { %>
+                <h2>Nothing here yet</h2>
+                <p>Posts from you and the people you follow show up here. <a href="/users">Find people to follow</a>, or see what <a href="/explore">everyone</a> is posting.</p>
+                <% } else { %>
+                <h2>No posts yet</h2>
+                <p>Be the first to post something.</p>
+                <% } %>
+            </div>
+            <% } %>
+            <%- include("partials/post-list", { posts, older }) %>
+        </main>
+
+        <aside class="side" aria-label="People to follow">
+            <% if (people.length) { %>
+            <div class="card side-card">
+                <h2>People to follow</h2>
+                <ul class="user-list">
+                    <% for (const person of people) { %><%- include("partials/user-row", { person, compact: true }) %><% } %>
+                </ul>
+                <a class="see-all" href="/users">See everyone</a>
+            </div>
+            <% } %>
+            <p class="side-note">Hearth is a project for The Odin Project.</p>
+        </aside>
+    </div>
+<%- include("partials/foot") %>

@@ -1,0 +1,9 @@
+<%- include("partials/head") %>
+    <div class="layout single">
+        <main class="column">
+            <p class="back"><a href="/">Back to home</a></p>
+            <h1 class="visually-hidden"><%= title %></h1>
+            <%- include("partials/post-card", { post, full: true }) %>
+        </main>
+    </div>
+<%- include("partials/foot") %>
