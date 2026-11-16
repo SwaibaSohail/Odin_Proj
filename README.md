@@ -24,6 +24,7 @@ A collection of projects built during [The Odin Project](https://www.theodinproj
 | [Blog API](https://swaibasohail.github.io/Odin_Proj/Blog%20API/reader/) | REST API with JWT log-in, plus separate reader and author websites (API hosted on Render) |
 | [Where's Waldo (Photo Tagging App)](https://github.com/SwaibaSohail/Odin_Proj/tree/main/Photo%20Tagging%20App) | Find four hidden characters in crowded pictures, timed by the server, with high scores (runs locally with Node.js) |
 | [Messaging App](https://parley-chat.onrender.com) | Direct messages, group chats, pictures and profiles, with online status and unread counts (hosted on Render) |
+| [Odin-Book](https://github.com/SwaibaSohail/Odin_Proj/tree/main/Odin%20Book) | Social network with follow requests, posts with pictures, likes, comments, profiles and a guest sign-in (runs locally with Node.js) |
 
 
 ## Tech Stack
@@ -34,10 +35,10 @@ A collection of projects built during [The Odin Project](https://www.theodinproj
 - Webpack (Restaurant Page)
 - LocalStorage API
 - REST APIs
-- Node.js and Express (Mini Message Board, Inventory Application, Members Only, File Uploader, Blog API, Photo Tagging App, Messaging App), with EJS for the first four
-- PostgreSQL (Inventory Application, Members Only, File Uploader, Blog API, Photo Tagging App, Messaging App)
-- Passport and bcrypt authentication (Members Only, File Uploader)
-- Prisma ORM (File Uploader, Blog API, Photo Tagging App, Messaging App), multer (File Uploader, Messaging App) and Supabase Storage (File Uploader)
+- Node.js and Express (Mini Message Board, Inventory Application, Members Only, File Uploader, Blog API, Photo Tagging App, Messaging App, Odin-Book), with EJS for the first four and Odin-Book
+- PostgreSQL (Inventory Application, Members Only, File Uploader, Blog API, Photo Tagging App, Messaging App, Odin-Book)
+- Passport and bcrypt authentication (Members Only, File Uploader, Odin-Book)
+- Prisma ORM (File Uploader, Blog API, Photo Tagging App, Messaging App, Odin-Book), multer (File Uploader, Messaging App, Odin-Book) and Supabase Storage (File Uploader)
 - REST APIs with JSON Web Tokens (Blog API, Messaging App)
 
 
@@ -48,8 +49,8 @@ A collection of projects built during [The Odin Project](https://www.theodinproj
 ### Prerequisites
 - Any modern web browser
 - (Optional) Local server like VS Code Live Server
-- [Node.js](https://nodejs.org/) for the Mini Message Board, Inventory Application, Members Only, File Uploader, Blog API, Photo Tagging App and Messaging App
-- [PostgreSQL](https://www.postgresql.org/download/) for the Inventory Application, Members Only, File Uploader, Blog API, Photo Tagging App and Messaging App
+- [Node.js](https://nodejs.org/) for the Mini Message Board, Inventory Application, Members Only, File Uploader, Blog API, Photo Tagging App, Messaging App and Odin-Book
+- [PostgreSQL](https://www.postgresql.org/download/) for the Inventory Application, Members Only, File Uploader, Blog API, Photo Tagging App, Messaging App and Odin-Book
 
 ### Steps
 
@@ -79,3 +80,5 @@ A collection of projects built during [The Odin Project](https://www.theodinproj
 8. **Run the Photo Tagging App** (needs Node.js and PostgreSQL): follow the setup steps in [its README](Photo%20Tagging%20App/README.md).
 
 9. **Run the Messaging App** (needs Node.js and PostgreSQL): follow the setup steps in [its README](Messaging%20App/README.md).
+
+10. **Run Odin-Book** (needs Node.js and PostgreSQL): follow the setup steps in [its README](Odin%20Book/README.md).
