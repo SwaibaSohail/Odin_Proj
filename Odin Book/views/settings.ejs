@@ -1,0 +1,53 @@
+<%- include("partials/head") %>
+    <div class="layout single">
+        <main class="column">
+            <h1 class="page-title">Settings</h1>
+
+            <section class="card settings-card">
+                <h2>Profile photo</h2>
+                <div class="photo-row">
+                    <%- include("partials/avatar", { user: me, size: 96 }) %>
+                    <div class="photo-buttons">
+                        <form method="post" action="/settings/photo" enctype="multipart/form-data" data-photo-form>
+                            <label class="btn btn-small file-button">
+                                <%= me.avatar ? "Change photo" : "Add a photo" %>
+                                <input type="file" name="photo" accept="image/png,image/jpeg,image/gif,image/webp" class="visually-hidden" required>
+                            </label>
+                            <noscript><button type="submit" class="btn btn-small">Upload</button></noscript>
+                        </form>
+                        <% if (me.avatar) { %>
+                        <form method="post" action="/settings/photo/remove"><button type="submit" class="btn btn-small">Remove</button></form>
+                        <% } %>
+                    </div>
+                </div>
+                <p class="hint">A square picture works best. Without a photo, people see your initials.</p>
+            </section>
+
+            <section class="card settings-card">
+                <h2>About you</h2>
+                <form method="post" action="/settings/profile" novalidate>
+                    <div class="field">
+                        <label for="displayName">Your name</label>
+                        <input id="displayName" name="displayName" value="<%= values.displayName %>" maxlength="40" autocomplete="name" required<%- errors.displayName ? ' aria-invalid="true"' : "" %>>
+                        <% if (errors.displayName) { %><p class="field-error"><%= errors.displayName %></p><% } %>
+                    </div>
+                    <div class="field">
+                        <label for="bio">Bio</label>
+                        <textarea id="bio" name="bio" rows="3" maxlength="200" placeholder="A line or two about you"<%- errors.bio ? ' aria-invalid="true"' : "" %>><%= values.bio %></textarea>
+                        <% if (errors.bio) { %><p class="field-error"><%= errors.bio %></p><% } %>
+                    </div>
+                    <div class="field">
+                        <label for="username">Username</label>
+                        <input id="username" value="@<%= me.username %>" readonly>
+                        <p class="hint">Usernames can't be changed.</p>
+                    </div>
+                    <label class="check">
+                        <input type="checkbox" name="requiresApproval"<%- values.requiresApproval ? " checked" : "" %>>
+                        <span><strong>Approve followers myself</strong><br><span class="hint">People send you a request, and follow you only once you accept it. With this off, anyone can follow you straight away.</span></span>
+                    </label>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </section>
+        </main>
+    </div>
+<%- include("partials/foot") %>
