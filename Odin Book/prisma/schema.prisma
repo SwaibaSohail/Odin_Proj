@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id               Int       @id @default(autoincrement())
+  username         String    @unique @db.VarChar(20) // always stored in lowercase
+  displayName      String    @db.VarChar(40)
+  bio              String    @default("") @db.VarChar(200)
+  passwordHash     String
+  // When true, people have to ask before they can follow this person.
+  requiresApproval Boolean   @default(true)
+  isGuest          Boolean   @default(false) // made by "Try as a guest", removed after a day
+  createdAt        DateTime  @default(now())
+  avatar           Image?    @relation("Avatar")
+  posts            Post[]
+  likes            Like[]
+  comments         Comment[]
+  following        Follow[]  @relation("Follower")
+  followers        Follow[]  @relation("Following")
+}
+
+enum FollowStatus {
+  PENDING // asked, waiting for an answer
+  ACCEPTED
+}
+
+// "follower" follows, or has asked to follow, "following".
+model Follow {
+  followerId  Int
+  followingId Int
+  status      FollowStatus
+  createdAt   DateTime     @default(now())
+  follower    User         @relation("Follower", fields: [followerId], references: [id], onDelete: Cascade)
+  following   User         @relation("Following", fields: [followingId], references: [id], onDelete: Cascade)
+
+  @@id([followerId, followingId])
+  @@index([followingId, status])
+}
+
+model Post {
+  id        Int       @id @default(autoincrement())
+  authorId  Int
+  body      String    @db.VarChar(1000)
+  createdAt DateTime  @default(now())
+  author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  image     Image?    @relation("PostImage")
+  likes     Like[]
+  comments  Comment[]
+
+  @@index([authorId, id])
+}
+
+model Like {
+  userId    Int
+  postId    Int
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@id([userId, postId])
+  @@index([postId])
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  postId    Int
+  authorId  Int
+  body      String   @db.VarChar(500)
+  createdAt DateTime @default(now())
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([postId, id])
+}
+
+// Pictures are kept in the database, so the app needs no separate file storage.
+// Each one is either attached to a post or is someone's profile photo.
+model Image {
+  id        String   @id @default(uuid())
+  data      Bytes
+  mimeType  String
+  width     Int
+  height    Int
+  postId    Int?     @unique
+  userId    Int?     @unique // set when this is a profile photo
+  createdAt DateTime @default(now())
+  post      Post?    @relation("PostImage", fields: [postId], references: [id], onDelete: Cascade)
+  user      User?    @relation("Avatar", fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// Where express-session keeps who is signed in. This is the table connect-pg-simple expects.
+model Session {
+  sid    String   @id @db.VarChar
+  sess   Json     @db.Json
+  expire DateTime @db.Timestamp(6)
+
+  @@index([expire])
+  @@map("session")
+}
