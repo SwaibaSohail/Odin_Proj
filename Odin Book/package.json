@@ -1,0 +1,35 @@
+{
+  "name": "odin-book",
+  "version": "1.0.0",
+  "description": "Hearth: a small social network with follow requests, posts, likes, comments and profiles, built with Express, Passport, Prisma and PostgreSQL",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js",
+    "postinstall": "prisma generate",
+    "migrate": "prisma migrate dev",
+    "seed": "node prisma/seeds.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@faker-js/faker": "^10.0.0",
+    "@prisma/adapter-pg": "7.10.1",
+    "@prisma/client": "7.10.1",
+    "bcryptjs": "^3.0.3",
+    "connect-pg-simple": "^10.0.0",
+    "dotenv": "^18.0.10",
+    "ejs": "^7.0.2",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.4",
+    "express-session": "^1.19.0",
+    "express-validator": "^7.3.2",
+    "helmet": "^8.3.0",
+    "image-size": "^2.1.0",
+    "multer": "^2.5.0",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.23.1",
+    "prisma": "7.10.1"
+  }
+}
