@@ -1,0 +1,30 @@
+<%- include("partials/head") %>
+    <main class="auth-main">
+        <div class="auth-card card">
+            <h2>Create your account</h2>
+            <p class="lead">It takes a few seconds, and there's no email to confirm.</p>
+            <form method="post" action="/signup" novalidate>
+                <div class="field">
+                    <label for="displayName">Your name</label>
+                    <input id="displayName" name="displayName" value="<%= values.displayName || "" %>" autocomplete="name" maxlength="40" required autofocus<%- errors.displayName ? ' aria-invalid="true"' : "" %>>
+                    <p class="hint">This is what other people see.</p>
+                    <% if (errors.displayName) { %><p class="field-error"><%= errors.displayName %></p><% } %>
+                </div>
+                <div class="field">
+                    <label for="username">Username</label>
+                    <input id="username" name="username" value="<%= values.username || "" %>" autocomplete="username" autocapitalize="none" spellcheck="false" maxlength="20" required<%- errors.username ? ' aria-invalid="true"' : "" %>>
+                    <p class="hint">3 to 20 letters, numbers or underscores.</p>
+                    <% if (errors.username) { %><p class="field-error"><%= errors.username %></p><% } %>
+                </div>
+                <div class="field">
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" autocomplete="new-password" required<%- errors.password ? ' aria-invalid="true"' : "" %>>
+                    <p class="hint">At least 8 characters.</p>
+                    <% if (errors.password) { %><p class="field-error"><%= errors.password %></p><% } %>
+                </div>
+                <button class="btn btn-primary btn-wide" type="submit">Sign up</button>
+            </form>
+            <p class="auth-switch">Already have an account? <a href="/login">Sign in</a></p>
+        </div>
+    </main>
+<%- include("partials/foot") %>

@@ -1,0 +1,32 @@
+<%- include("partials/head") %>
+    <main class="auth-main">
+        <div class="auth-intro">
+            <h1>A quiet corner of the internet.</h1>
+            <p>Follow people you like, share what you're up to, and keep up with what they post.</p>
+        </div>
+
+        <div class="auth-card card">
+            <h2>Sign in</h2>
+            <% if (error) { %><p class="form-message error" role="alert"><%= error %></p><% } %>
+            <form method="post" action="/login">
+                <div class="field">
+                    <label for="username">Username</label>
+                    <input id="username" name="username" value="<%= username %>" autocomplete="username" autocapitalize="none" spellcheck="false" maxlength="20" required autofocus>
+                </div>
+                <div class="field">
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" autocomplete="current-password" required>
+                </div>
+                <button class="btn btn-primary btn-wide" type="submit">Sign in</button>
+            </form>
+
+            <p class="or"><span>or</span></p>
+            <form method="post" action="/guest">
+                <button class="btn btn-wide" type="submit">Look around as a guest</button>
+            </form>
+            <p class="hint center">No sign-up needed. Guest accounts are removed after a day.</p>
+
+            <p class="auth-switch">New here? <a href="/signup">Create an account</a></p>
+        </div>
+    </main>
+<%- include("partials/foot") %>

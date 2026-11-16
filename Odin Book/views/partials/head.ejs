@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> · Hearth</title>
+    <meta name="description" content="Hearth is a small social network: follow people, post, like and comment.">
+    <script src="/js/theme-init.js"></script>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@600&display=swap">
+    <link rel="stylesheet" href="/styles.css">
+    <script type="module" src="/js/theme.js"></script>
+    <script type="module" src="/js/app.js"></script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a href="/" class="logo"><%- include("logo") %>Hearth</a>
+            <% if (me) { %>
+            <nav class="site-nav" aria-label="Main">
+                <a href="/" <%- here === "/" || here.startsWith("/?") ? 'aria-current="page"' : "" %>>Home</a>
+                <a href="/explore" <%- here.startsWith("/explore") ? 'aria-current="page"' : "" %>>Explore</a>
+                <a href="/users" <%- here === "/users" || here.startsWith("/users?") ? 'aria-current="page"' : "" %>>People</a>
+                <a href="/requests" <%- here.startsWith("/requests") ? 'aria-current="page"' : "" %>>Requests<% if (pendingRequests) { %> <span class="badge" aria-label="<%= pendingRequests %> waiting"><%= pendingRequests %></span><% } %></a>
+            </nav>
+            <div class="site-tools">
+                <a class="me-link" href="/users/<%= me.username %>" title="Your profile">
+                    <%- include("avatar", { user: me, size: 28 }) %>
+                    <span class="me-name"><%= me.displayName %></span>
+                </a>
+                <a href="/settings" <%- here.startsWith("/settings") ? 'aria-current="page"' : "" %>>Settings</a>
+                <button type="button" class="theme-toggle" aria-label="Toggle dark mode">Dark</button>
+                <form method="post" action="/logout"><button type="submit" class="link-button">Log out</button></form>
+            </div>
+            <% } else { %>
+            <div class="site-tools">
+                <button type="button" class="theme-toggle" aria-label="Toggle dark mode">Dark</button>
+            </div>
+            <% } %>
+        </div>
+    </header>
+    <% if (flash) { %>
+    <p class="flash <%= flash.kind %>" role="status"><%= flash.text %></p>
+    <% } %>
